@@ -88,6 +88,25 @@ function startRecipe(batchIndex,recipe){
   app.calculate();
 }
 
+function runQuickExample(recipeIndex=1){
+  const recipe=RECIPES.lumber[recipeIndex]||RECIPES.lumber[1];
+  app.render('lumber',false);
+  app.clearInventorySource?.();
+  app.setCuts(recipe.cuts||[]);
+  app.setProjectValues({piece:8,full:12,waste:recipe.reserve||0,kerf:.125});
+  app.calculate(false);
+  const status=$('quickDemoStatus');
+  if(status)status.textContent='Loaded: 12 standard 8-ft boards → '+recipe.name+'. The live plan below shows the cut allocation and purchase gap.';
+  requestAnimationFrame(()=>$('planner')?.scrollIntoView({behavior:'smooth',block:'start'}));
+}
+function wireQuickDemo(){
+  const main=$('tryExample');
+  if(main)main.onclick=()=>runQuickExample(1);
+  document.querySelectorAll('[data-demo-recipe]').forEach(btn=>{
+    btn.onclick=()=>runQuickExample(Number(btn.dataset.demoRecipe)||0);
+  });
+}
+
 function refreshDiscovery(){
   const box=$('projectSuggestions');if(!box)return;
   const inv=app.inventory(),matches=[];
@@ -225,6 +244,7 @@ function onCleared(){['layoutLab','purchasePlan','leftoverLoop'].forEach(id=>{if
 window.addEventListener('leftover:calculated',onCalculated);
 window.addEventListener('leftover:cleared',onCleared);
 window.LeftoverFeatures={refreshDiscovery};
+wireQuickDemo();
 ensureWorkshopButton();
 refreshDiscovery();
 handleStockLink();
