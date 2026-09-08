@@ -1003,3 +1003,163 @@ footer{
   #guide-directory .related-grid{grid-template-columns:1fr}
   #guide-directory .related-grid a:nth-child(even){padding-left:0;border-left:0}
 }
+
+
+/* SIGNATURE DISCOVERY / WHAT CAN I MAKE — 2026-09-08 */
+.quick-discovery{
+  max-width:1240px;
+  margin:0 auto;
+  padding:74px 26px 68px;
+  display:grid;
+  grid-template-columns:minmax(0,.78fr) minmax(460px,1.22fr);
+  gap:0;
+  border-bottom:1px solid var(--work-rule);
+}
+.quick-discovery-copy{
+  padding:8px 44px 18px 0;
+  border-right:1px solid var(--work-rule);
+}
+.quick-discovery h2{
+  margin:12px 0 18px;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:clamp(38px,4.2vw,58px);
+  line-height:.98;
+  letter-spacing:-.055em;
+}
+.quick-discovery-copy>p{
+  max-width:520px;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:15px;
+  line-height:1.6;
+  color:#555d58;
+}
+.quick-demo-stock{
+  margin-top:28px;
+  padding-top:18px;
+  border-top:1px solid var(--work-rule);
+}
+.quick-demo-stock strong,
+.quick-demo-stock span{
+  display:block;
+}
+.quick-demo-stock strong{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:13px;
+  letter-spacing:.03em;
+}
+.quick-demo-stock span{
+  margin-top:5px;
+  color:#666b66;
+  font-size:11px;
+}
+.quick-demo-actions{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-top:18px;
+  flex-wrap:wrap;
+}
+.quick-demo-actions button{
+  border:0;
+  border-radius:2px;
+  background:var(--work-orange);
+  color:#fff;
+  padding:14px 17px;
+  font:700 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+.quick-demo-actions a{
+  padding-bottom:3px;
+  border-bottom:1px solid var(--work-ink);
+  font-size:11px;
+}
+#quickDemoStatus{
+  min-height:18px;
+  margin:12px 0 0;
+  font:700 9px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:#626862;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+.quick-discovery-sheet{
+  position:relative;
+  padding:30px 0 0 40px;
+}
+.quick-discovery-sheet:before{
+  content:"FIELD MATCH / SAMPLE STOCK";
+  position:absolute;
+  top:0;
+  left:40px;
+  font:700 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing:.12em;
+  color:#676b66;
+}
+.quick-project-list{
+  border-top:1px solid var(--work-rule);
+  border-left:1px solid var(--work-rule);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+.quick-project{
+  min-height:146px;
+  padding:18px;
+  border:0;
+  border-right:1px solid var(--work-rule);
+  border-bottom:1px solid var(--work-rule);
+  background:rgba(255,253,248,.5);
+  text-align:left;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  cursor:pointer;
+  color:var(--work-ink);
+}
+.quick-project:hover,
+.quick-project:focus-visible{
+  background:var(--work-white);
+}
+.quick-project .match-status{
+  font:700 8px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing:.1em;
+  color:var(--work-green);
+}
+.quick-project b{
+  margin-top:25px;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:21px;
+  letter-spacing:-.035em;
+}
+.quick-project small{
+  margin-top:auto;
+  padding-top:14px;
+  font:700 9px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:#6b706b;
+}
+.quick-discovery-note{
+  margin:13px 0 0;
+  font-size:10px;
+  line-height:1.5;
+  color:#6d716d;
+}
+@media(max-width:800px){
+  .quick-discovery{
+    grid-template-columns:1fr;
+    padding:56px 20px 54px;
+  }
+  .quick-discovery-copy{
+    padding:0 0 34px;
+    border-right:0;
+    border-bottom:1px solid var(--work-rule);
+  }
+  .quick-discovery-sheet{
+    padding:46px 0 0;
+  }
+  .quick-discovery-sheet:before{left:0;top:20px}
+}
+@media(max-width:520px){
+  .quick-project-list{grid-template-columns:1fr}
+  .quick-project{min-height:118px}
+  .quick-discovery h2{font-size:40px}
+}
