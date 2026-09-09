@@ -18,11 +18,34 @@ for (const file of fs.readdirSync('dist')) {
   const p = path.join('dist', file);
   let html = fs.readFileSync(p, 'utf8');
   if (clusterLinks[file] && !html.includes('seo-cluster-links')) html = html.replace('</main>', clusterLinks[file] + '\n</main>');
-  if (html.includes('"@type":"Article"') && !html.includes('"datePublished"')) {
-    html = html.replace('"@type":"Article"', '"@type":"Article","image":"https://www.buildwithleftovers.com/logo.svg","datePublished":"2026-09-09","dateModified":"2026-09-09"');
-  }
-  if (html.includes('"publisher":{"@type":"Organization"') && !html.includes('"publisher":{"@type":"Organization","logo"')) {
-    html = html.replace('"publisher":{"@type":"Organization","name":"Leftover"', '"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.buildwithleftovers.com/logo.svg"},"name":"Leftover"');
+  let addedAuthor = false;
+  html = html.replace(/(<script\b[^>]*type=["']application\/ld\+json["'][^>]*>)([\s\S]*?)(<\/script>)/gi, (_, start, json, end) => {
+    const schema = JSON.parse(json);
+    const normalize = node => {
+      if (!node || typeof node !== 'object') return;
+      if (Array.isArray(node)) { node.forEach(normalize); return; }
+      const types = [].concat(node['@type'] || []);
+      if (types.some(type => ['Article', 'BlogPosting', 'NewsArticle'].includes(type))) {
+        if (!node.author) {
+          node.author = { '@type': 'Organization', name: 'Leftover', url: 'https://www.buildwithleftovers.com/about' };
+          addedAuthor = true;
+        }
+        node.publisher ||= { '@type': 'Organization', name: 'Leftover', url: 'https://www.buildwithleftovers.com/' };
+        const publishers = [].concat(node.publisher);
+        for (const publisher of publishers) {
+          if (publisher.name === 'Leftover') publisher.logo ||= { '@type': 'ImageObject', url: 'https://www.buildwithleftovers.com/logo.svg' };
+        }
+        // A brand logo is not a representative article image. Keep actual editorial images.
+        if (node.image === 'https://www.buildwithleftovers.com/logo.svg') delete node.image;
+        // Publication dates belong to the source article; never invent them at build time.
+      }
+      Object.values(node).forEach(normalize);
+    };
+    normalize(schema);
+    return start + JSON.stringify(schema) + end;
+  });
+  if (addedAuthor && !html.includes('By Leftover')) {
+    html = html.replace(/<\/h1>/i, '</h1><p class="guide-updated">By <a href="/about">Leftover</a></p>');
   }
   if (!html.includes('/a11y.css')) html = html.replace('</head>', '<link rel="stylesheet" href="/a11y.css?v=20260909-a11y2"/>\n</head>');
   fs.writeFileSync(p, html);
