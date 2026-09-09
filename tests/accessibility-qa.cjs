@@ -7,7 +7,8 @@ const pages = ['/', '/tile', '/flooring', '/plywood', '/lumber', '/wallpaper', '
 
 (async()=>{
   const browser = await chromium.launch({ headless: true });
-  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
   const failures = [];
   let scanned = 0;
 
@@ -37,6 +38,7 @@ const pages = ['/', '/tile', '/flooring', '/plywood', '/lumber', '/wallpaper', '
     scanned++;
   }
 
+  await context.close();
   await browser.close();
   if (failures.length) {
     console.error(failures.join('\n'));
