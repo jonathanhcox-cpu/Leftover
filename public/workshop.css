@@ -1163,3 +1163,53 @@ footer{
   .quick-project{min-height:118px}
   .quick-discovery h2{font-size:40px}
 }
+
+
+/* Project finder / what-can-i-make */
+.finder-hero .micro{display:block;margin-top:16px}
+.finder-shell{padding:72px max(24px,6vw);border-top:1px solid var(--line,#d8ddd8)}
+.finder-copy{max-width:760px;margin-bottom:28px}
+.finder-copy h2{max-width:680px}
+.finder-grid{display:grid;grid-template-columns:minmax(300px,.78fr) minmax(0,1.22fr);gap:24px;align-items:start}
+.finder-form{position:sticky;top:92px}
+.finder-form>label,.finder-form .finder-input-grid label{display:grid;gap:8px;font-weight:700}
+.finder-form select,.finder-form input{width:100%;box-sizing:border-box}
+.finder-input-grid{display:grid;grid-template-columns:.7fr 1fr 1fr;gap:12px;margin:18px 0 10px}
+.finder-input-grid label span:last-child{display:flex;align-items:center;gap:6px}
+.finder-input-grid small{font-weight:600;opacity:.65}
+.finder-field-note{font-size:.88rem;opacity:.72;margin:4px 0 18px}
+.finder-sample-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.finder-sample-row button,.finder-results-head button{border:1px solid currentColor;background:transparent;padding:10px 12px;cursor:pointer}
+.finder-results{min-height:520px}
+.finder-results-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;border-bottom:1px solid var(--line,#d8ddd8);padding-bottom:18px;margin-bottom:18px}
+.finder-results-head h3{margin:6px 0 0}
+.finder-results-head button:disabled{opacity:.4;cursor:not-allowed}
+.finder-summary{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px;font-size:.9rem}
+.finder-summary span{opacity:.72}
+.finder-warning{display:block;padding:12px;border:1px solid currentColor}
+.idea-results{display:grid;gap:10px}
+.idea-match{display:grid;grid-template-columns:44px minmax(0,1fr) 110px auto;gap:14px;align-items:center;padding:16px 0;border-top:1px solid var(--line,#d8ddd8)}
+.idea-match:first-child{border-top:0}
+.idea-rank{font-size:.78rem;letter-spacing:.12em;opacity:.48}
+.idea-match-copy h4{margin:5px 0 4px;font-size:1.05rem}
+.idea-match-copy p{margin:0 0 6px;opacity:.8}
+.idea-match-copy small{display:block;opacity:.65;line-height:1.4}
+.idea-meter{position:relative;height:7px;background:rgba(23,63,53,.12);min-width:90px}
+.idea-meter i{position:absolute;left:0;top:0;bottom:0;background:currentColor}
+.idea-meter b{position:absolute;right:0;top:10px;font-size:.75rem}
+.idea-open{white-space:nowrap;font-weight:700;text-decoration:none}
+.recipe-status{font-size:.68rem;letter-spacing:.09em;font-weight:800;opacity:.66}
+.recipe-status.ready{opacity:1}
+.idea-match.ready{background:linear-gradient(90deg,rgba(23,63,53,.045),transparent)}
+@media(max-width:900px){
+  .finder-grid{grid-template-columns:1fr}
+  .finder-form{position:static}
+  .idea-match{grid-template-columns:34px minmax(0,1fr)}
+  .idea-meter,.idea-open{grid-column:2}
+  .idea-open{white-space:normal}
+}
+@media(max-width:560px){
+  .finder-input-grid{grid-template-columns:1fr}
+  .finder-results-head{display:grid}
+  .finder-summary{display:grid}
+}
