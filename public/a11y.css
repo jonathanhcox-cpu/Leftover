@@ -3,12 +3,15 @@
 
 /* Contrast corrections identified by automated axe scans. */
 .micro,.hero-proof span,.quick-discovery-note,.section-title p,.steps p,.muted-note,.material small,.stats small,.legend,.breadcrumbs span,.guide-breadcrumb span[aria-current="page"],
-#plannerKicker,.trust-strip span,article p,.related a span,#dimensionNote,.finder-field-note,.finder-shell small{color:var(--accessible-muted)!important}
-.scrap-editor p,.cut-editor p{color:var(--accessible-muted)!important}
+#plannerKicker,.trust-strip span,.scrap-editor p,.cut-editor p{color:var(--accessible-muted)!important}
 .steps strong{color:var(--accessible-step)!important}
 .workshop-hero .cta,#tryExample{background:var(--accessible-accent)!important;color:#fff!important}
 .finder-results strong,.finder-summary strong{color:var(--accessible-accent)!important}
 .difference article:first-child>span{color:#ffd0b3!important}
+
+/* Context-specific contrast: avoid applying muted dark text to dark cards. */
+.related a span{color:#405b51!important}
+.finder-field-note,#dimensionNote,.finder-shell small{color:#505d57!important}
 
 /* Minimum practical control sizing on touch screens. */
 select{min-height:36px;padding:8px 30px 8px 10px}
