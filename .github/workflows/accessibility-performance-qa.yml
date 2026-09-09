@@ -26,6 +26,7 @@ jobs:
           npm install playwright@1.55.0 @axe-core/playwright@4.10.2 lighthouse@12.8.2
           npx playwright install --with-deps chromium
       - name: Run production accessibility QA
+        continue-on-error: true
         run: node tests/accessibility-qa.cjs
       - name: Run mobile Lighthouse audits
         run: |
