@@ -1,0 +1,19 @@
+/* Mobile QA fixes */
+@media (max-width: 800px) {
+  footer nav {
+    flex-wrap: wrap;
+    gap: 12px 18px;
+    max-width: 100%;
+  }
+  footer nav a {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .result-actions {
+    flex-wrap: wrap;
+  }
+  .result-actions button {
+    flex: 1 1 140px;
+    min-width: 0;
+  }
+}
