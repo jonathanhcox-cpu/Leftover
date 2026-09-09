@@ -1,0 +1,28 @@
+name: Browser QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/**'
+      - 'tests/browser-qa.cjs'
+      - '.github/workflows/browser-qa.yml'
+  workflow_dispatch:
+
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm init -y
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Run production browser QA
+        run: node tests/browser-qa.cjs
