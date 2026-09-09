@@ -1,0 +1,26 @@
+/* Shared accessibility and mobile usability hardening. */
+:root{--accessible-muted:#59665f;--accessible-accent:#a84f2f;--accessible-step:#477366}
+
+/* Contrast corrections identified by automated axe scans. */
+.micro,.hero-proof span,.quick-discovery-note,.section-title p,.steps p,.muted-note,.material small,.stats small,.legend,.breadcrumbs span,.guide-breadcrumb span[aria-current="page"]{color:var(--accessible-muted)!important}
+.scrap-editor p,.cut-editor p{color:var(--accessible-muted)!important}
+.steps strong{color:var(--accessible-step)!important}
+.workshop-hero .cta,#tryExample{background:var(--accessible-accent)!important;color:#fff!important}
+.finder-shell small,.finder-field-note{color:var(--accessible-muted)!important}
+.finder-results strong,.finder-summary strong{color:var(--accessible-accent)!important}
+
+/* Minimum practical control sizing on touch screens. */
+select{min-height:36px;padding:8px 30px 8px 10px}
+button{min-height:32px}
+#clearInventory{min-height:32px;padding:6px 12px}
+header a,footer a{min-height:24px;display:inline-flex;align-items:center}
+footer nav a{padding:5px 0}
+
+/* Preserve visible keyboard focus across custom buttons and links. */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #236b58;outline-offset:3px;border-radius:4px}
+
+@media(max-width:800px){
+  footer nav{gap:8px 16px}
+  footer nav a{min-height:32px;padding:7px 0}
+  select{min-height:40px}
+}
