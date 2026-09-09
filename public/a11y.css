@@ -1,13 +1,14 @@
 /* Shared accessibility and mobile usability hardening. */
-:root{--accessible-muted:#59665f;--accessible-accent:#a84f2f;--accessible-step:#477366}
+:root{--accessible-muted:#505d57;--accessible-accent:#944326;--accessible-step:#477366}
 
 /* Contrast corrections identified by automated axe scans. */
-.micro,.hero-proof span,.quick-discovery-note,.section-title p,.steps p,.muted-note,.material small,.stats small,.legend,.breadcrumbs span,.guide-breadcrumb span[aria-current="page"]{color:var(--accessible-muted)!important}
+.micro,.hero-proof span,.quick-discovery-note,.section-title p,.steps p,.muted-note,.material small,.stats small,.legend,.breadcrumbs span,.guide-breadcrumb span[aria-current="page"],
+#plannerKicker,.trust-strip span,article p,.related a span,#dimensionNote,.finder-field-note,.finder-shell small{color:var(--accessible-muted)!important}
 .scrap-editor p,.cut-editor p{color:var(--accessible-muted)!important}
 .steps strong{color:var(--accessible-step)!important}
 .workshop-hero .cta,#tryExample{background:var(--accessible-accent)!important;color:#fff!important}
-.finder-shell small,.finder-field-note{color:var(--accessible-muted)!important}
 .finder-results strong,.finder-summary strong{color:var(--accessible-accent)!important}
+.difference article:first-child>span{color:#ffd0b3!important}
 
 /* Minimum practical control sizing on touch screens. */
 select{min-height:36px;padding:8px 30px 8px 10px}
