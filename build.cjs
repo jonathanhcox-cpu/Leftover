@@ -25,6 +25,9 @@ for (const file of fs.readdirSync('dist')) {
       if (!node || typeof node !== 'object') return;
       if (Array.isArray(node)) { node.forEach(normalize); return; }
       const types = [].concat(node['@type'] || []);
+      if (types.includes('Organization') && node.name === 'Leftover') {
+        node.logo ||= { '@type': 'ImageObject', url: 'https://www.buildwithleftovers.com/logo.svg' };
+      }
       if (types.some(type => ['Article', 'BlogPosting', 'NewsArticle'].includes(type))) {
         if (!node.author) {
           node.author = { '@type': 'Organization', name: 'Leftover', url: 'https://www.buildwithleftovers.com/about' };
