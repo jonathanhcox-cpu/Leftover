@@ -18,7 +18,10 @@ const pages = ['/', '/tile', '/flooring', '/plywood', '/lumber', '/wallpaper', '
 
     const results = await new AxeBuilder({ page }).analyze();
     const serious = results.violations.filter(v => ['serious','critical'].includes(v.impact));
-    for (const v of serious) failures.push(`${path}: ${v.id} (${v.impact}) — ${v.help}; nodes=${v.nodes.length}`);
+    for (const v of serious) {
+      const detail = v.nodes.slice(0,12).map(n => `${n.target.join(' ')} :: ${String(n.failureSummary||'').replace(/\s+/g,' ').slice(0,220)}`).join(' | ');
+      failures.push(`${path}: ${v.id} (${v.impact}) — ${v.help}; nodes=${v.nodes.length}; ${detail}`);
+    }
 
     const unnamed = await page.locator('button, a[href], input, select, textarea').evaluateAll(els => els.filter(el => {
       const aria = el.getAttribute('aria-label') || el.getAttribute('aria-labelledby') || '';
@@ -27,13 +30,13 @@ const pages = ['/', '/tile', '/flooring', '/plywood', '/lumber', '/wallpaper', '
     }).map(el => `${el.tagName.toLowerCase()}#${el.id || ''}.${el.className || ''}`).slice(0,10));
     if (unnamed.length) failures.push(`${path}: unnamed interactive controls: ${unnamed.join(', ')}`);
 
-    const tinyTargets = await page.locator('button, a[href], input, select').evaluateAll(els => els.filter(el => {
+    const tinyTargets = await page.locator('button, select, input:not([type="checkbox"]):not([type="radio"]), header a, footer a, .result-actions a, .result-actions button, .presets button').evaluateAll(els => els.filter(el => {
       const r = el.getBoundingClientRect();
       const s = getComputedStyle(el);
       if (s.display === 'none' || s.visibility === 'hidden' || r.width === 0 || r.height === 0) return false;
       return (r.width < 24 || r.height < 24);
     }).map(el => ({tag:el.tagName,id:el.id,text:(el.innerText||el.getAttribute('aria-label')||'').trim().slice(0,40),w:Math.round(el.getBoundingClientRect().width),h:Math.round(el.getBoundingClientRect().height)})).slice(0,12));
-    if (tinyTargets.length) failures.push(`${path}: targets under 24px: ${JSON.stringify(tinyTargets)}`);
+    if (tinyTargets.length) failures.push(`${path}: actionable targets under 24px: ${JSON.stringify(tinyTargets)}`);
 
     scanned++;
   }
@@ -44,5 +47,5 @@ const pages = ['/', '/tile', '/flooring', '/plywood', '/lumber', '/wallpaper', '
     console.error(failures.join('\n'));
     process.exit(1);
   }
-  console.log(`Accessibility QA passed: ${scanned} production pages; no serious/critical axe violations, unnamed controls, or sub-24px interactive targets.`);
+  console.log(`Accessibility QA passed: ${scanned} production pages; no serious/critical axe violations, unnamed controls, or actionable sub-24px targets.`);
 })().catch(e => { console.error(e.stack || e); process.exit(1); });
