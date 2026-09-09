@@ -1,3 +1,4 @@
+// Production browser QA: rerun after mobile layout fixes.
 const { chromium } = require('playwright');
 const assert = require('assert');
 const base='https://www.buildwithleftovers.com';
