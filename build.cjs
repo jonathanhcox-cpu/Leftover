@@ -21,7 +21,10 @@ for (const file of fs.readdirSync('dist')) {
   if (html.includes('"@type":"Article"') && !html.includes('"datePublished"')) {
     html = html.replace('"@type":"Article"', '"@type":"Article","image":"https://www.buildwithleftovers.com/logo.svg","datePublished":"2026-09-09","dateModified":"2026-09-09"');
   }
-  if (!html.includes('/a11y.css')) html = html.replace('</head>', '<link rel="stylesheet" href="/a11y.css?v=20260909-a11y"/>\n</head>');
+  if (html.includes('"publisher":{"@type":"Organization"') && !html.includes('"publisher":{"@type":"Organization","logo"')) {
+    html = html.replace('"publisher":{"@type":"Organization","name":"Leftover"', '"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://www.buildwithleftovers.com/logo.svg"},"name":"Leftover"');
+  }
+  if (!html.includes('/a11y.css')) html = html.replace('</head>', '<link rel="stylesheet" href="/a11y.css?v=20260909-a11y2"/>\n</head>');
   fs.writeFileSync(p, html);
 }
 console.log('Built Leftover static website');
