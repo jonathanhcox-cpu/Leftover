@@ -1,8 +1,8 @@
 const fs = require('node:fs');
-const assert = require('node:assert');
 const reports = process.argv.slice(2);
 if (!reports.length) throw new Error('No Lighthouse reports provided');
 let failed = false;
+function compact(x){return String(x||'').replace(/\s+/g,' ').slice(0,500)}
 for (const file of reports) {
   const r = JSON.parse(fs.readFileSync(file,'utf8'));
   const path = new URL(r.finalUrl).pathname;
@@ -15,6 +15,16 @@ for (const file of reports) {
   const tbt = r.audits['total-blocking-time'].numericValue;
   const speed = r.audits['speed-index'].numericValue;
   console.log(`${path}: performance=${perf} accessibility=${a11y} best-practices=${bp} seo=${seo} LCP=${Math.round(lcp)}ms CLS=${cls.toFixed(3)} TBT=${Math.round(tbt)}ms SpeedIndex=${Math.round(speed)}ms`);
+
+  const lcpEl = r.audits['largest-contentful-paint-element'];
+  if (lcpEl?.details?.items?.length) console.log(`LCP_ELEMENT ${path}: ${compact(JSON.stringify(lcpEl.details.items[0]))}`);
+  const lcpBreak = r.audits['lcp-breakdown-insight'] || r.audits['lcp-phases'];
+  if (lcpBreak?.details) console.log(`LCP_BREAKDOWN ${path}: ${compact(JSON.stringify(lcpBreak.details))}`);
+  const clsSources = r.audits['layout-shifts'] || r.audits['cls-culprits-insight'];
+  if (clsSources?.details) console.log(`CLS_SOURCES ${path}: ${compact(JSON.stringify(clsSources.details))}`);
+  const render = r.audits['render-blocking-resources'] || r.audits['render-blocking-insight'];
+  if (render?.details) console.log(`RENDER_BLOCKING ${path}: ${compact(JSON.stringify(render.details))}`);
+
   const problems = [];
   if (a11y < 95) problems.push(`accessibility ${a11y}<95`);
   if (seo < 95) problems.push(`seo ${seo}<95`);
