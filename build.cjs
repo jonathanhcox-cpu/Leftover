@@ -16,6 +16,9 @@ for (const file of fs.readdirSync('dist')) {
   const p = path.join('dist', file);
   let html = fs.readFileSync(p, 'utf8');
   if (clusterLinks[file] && !html.includes('seo-cluster-links')) html = html.replace('</main>', clusterLinks[file] + '\n</main>');
+  if (html.includes('"@type":"Article"') && !html.includes('"datePublished"')) {
+    html = html.replace('"@type":"Article"', '"@type":"Article","image":"https://www.buildwithleftovers.com/logo.svg","datePublished":"2026-09-09","dateModified":"2026-09-09"');
+  }
   if (!html.includes('/a11y.css')) html = html.replace('</head>', '<link rel="stylesheet" href="/a11y.css?v=20260909-a11y"/>\n</head>');
   fs.writeFileSync(p, html);
 }
