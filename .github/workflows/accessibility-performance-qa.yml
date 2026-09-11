@@ -24,14 +24,38 @@ jobs:
       - name: Install audit tools
         run: |
           npm init -y
-          npm install playwright@1.55.0 @axe-core/playwright@4.10.2 lighthouse@12.8.2
+          npm install playwright@1.55.0 @axe-core/playwright@4.10.2 lighthouse@12.8.2 serve@14.2.4
           npx playwright install --with-deps chromium
-      - name: Run production accessibility QA
-        continue-on-error: true
+      - name: Build exact commit
+        run: node build.cjs
+      - name: Start local production build
+        run: |
+          npx serve dist -l 4173 > /tmp/leftover-serve.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/leftover-serve.log
+          exit 1
+      - name: Run accessibility QA
+        env:
+          QA_BASE_URL: http://127.0.0.1:4173
         run: node tests/accessibility-qa.cjs
       - name: Run mobile Lighthouse audits
         run: |
-          npx lighthouse https://www.buildwithleftovers.com/ --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-home.json
-          npx lighthouse https://www.buildwithleftovers.com/tile --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-tile.json
-          npx lighthouse https://www.buildwithleftovers.com/what-can-i-make --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-finder.json
-          node tests/performance-qa.cjs lh-home.json lh-tile.json lh-finder.json
+          set -o pipefail
+          npx lighthouse http://127.0.0.1:4173/ --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-home.json
+          npx lighthouse http://127.0.0.1:4173/tile --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-tile.json
+          npx lighthouse http://127.0.0.1:4173/what-can-i-make --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-finder.json
+          node tests/performance-qa.cjs lh-home.json lh-tile.json lh-finder.json 2>&1 | tee lighthouse-summary.log
+      - name: Upload Lighthouse diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-diagnostics
+          path: |
+            lighthouse-summary.log
+            lh-home.json
+            lh-tile.json
+            lh-finder.json
+          if-no-files-found: ignore
