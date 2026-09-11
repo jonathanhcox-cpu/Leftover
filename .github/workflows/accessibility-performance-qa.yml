@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'public/**'
+      - 'build.cjs'
       - 'tests/accessibility-qa.cjs'
       - 'tests/performance-qa.cjs'
       - '.github/workflows/accessibility-performance-qa.yml'
