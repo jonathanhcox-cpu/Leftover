@@ -30,6 +30,31 @@ let passed=0;
    for(const id of ['need','have','delta']) assert((await page.locator('#'+id).textContent()).trim()!=='—',`${slug} ${id} not populated`);
    assert(!(await page.locator('#sharePlan').isDisabled()),`${slug} share disabled after calculation`);
    assert(!(await page.locator('#printPlan').isDisabled()),`${slug} print disabled after calculation`);
+
+   if(slug==='lumber'){
+     const workshop=page.locator('#workshopMode');
+     assert(await workshop.count(),'Workshop Mode button missing');
+     assert(!(await workshop.isDisabled()),'Workshop Mode disabled after valid lumber calculation');
+     await workshop.click();
+     await page.waitForSelector('#workshopModal:not([hidden])');
+     assert((await page.locator('#workshopTitle').textContent()).includes('Step-by-step build guide'),'Workshop title did not explain mode');
+     let guard=0;
+     while(guard++<200){
+       const next=page.locator('#workshopNext');
+       const hidden=await next.isHidden();
+       if(hidden)break;
+       const text=(await next.textContent()).trim();
+       await next.click();
+       await page.waitForTimeout(10);
+       if(text==='Finish build guide')break;
+     }
+     const complete=(await page.locator('#workshopStep').textContent()).trim();
+     assert(complete.includes('BUILD GUIDE COMPLETE'),'Workshop Mode did not reach completion state');
+     assert(complete.includes('planned step'),'Workshop completion omitted step summary');
+     assert(await page.locator('#workshopPrint').isVisible(),'Workshop completion missing print action');
+     assert(await page.locator('#workshopAnother').isVisible(),'Workshop completion missing plan-another-project action');
+     await page.locator('#workshopClose').click();
+   }
    passed++;
  }
  await page.goto(`${base}/what-can-i-make`,{waitUntil:'domcontentloaded'});
@@ -49,6 +74,6 @@ let passed=0;
  }
  passed++;
  assert(errors.length===0,'browser console/page errors: '+errors.join(' | '));
- console.log(`Browser QA passed: ${passed} scenario groups, ${materialPages.length} calculators, project finder, mobile overflow, and internal links.`);
+ console.log(`Browser QA passed: ${passed} scenario groups, ${materialPages.length} calculators, Workshop Mode completion, project finder, mobile overflow, and internal links.`);
  await browser.close();
 })().catch(e=>{console.error(e.stack||e);process.exit(1);});
