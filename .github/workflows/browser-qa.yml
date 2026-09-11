@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'public/**'
+      - 'build.cjs'
       - 'tests/browser-qa.cjs'
       - '.github/workflows/browser-qa.yml'
   workflow_dispatch:
