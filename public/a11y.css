@@ -33,3 +33,5 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   footer nav a{min-height:32px;padding:7px 0}
   select{min-height:40px}
 }
+
+/* QA retrigger marker: homepage performance tuning validated against this revision. */
