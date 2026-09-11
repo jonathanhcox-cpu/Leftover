@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 const AxeBuilder = require('@axe-core/playwright').default;
 const assert = require('node:assert');
 
-const base = 'https://www.buildwithleftovers.com';
+const base = process.env.QA_BASE_URL || 'https://www.buildwithleftovers.com';
 const pages = ['/', '/tile', '/flooring', '/plywood', '/lumber', '/wallpaper', '/decking', '/trim', '/what-can-i-make'];
 
 (async()=>{
@@ -47,5 +47,5 @@ const pages = ['/', '/tile', '/flooring', '/plywood', '/lumber', '/wallpaper', '
     console.error(failures.join('\n'));
     process.exit(1);
   }
-  console.log(`Accessibility QA passed: ${scanned} production pages; no serious/critical axe violations, unnamed controls, or actionable sub-24px targets.`);
+  console.log(`Accessibility QA passed: ${scanned} pages; no serious/critical axe violations, unnamed controls, or actionable sub-24px targets.`);
 })().catch(e => { console.error(e.stack || e); process.exit(1); });
