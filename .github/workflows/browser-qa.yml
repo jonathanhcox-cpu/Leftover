@@ -20,10 +20,33 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install Playwright
+      - name: Install browser QA tools
         run: |
           npm init -y
-          npm install playwright@1.55.0
+          npm install playwright@1.55.0 serve@14.2.4
           npx playwright install --with-deps chromium
-      - name: Run production browser QA
-        run: node tests/browser-qa.cjs
+      - name: Build exact commit
+        run: node build.cjs
+      - name: Start local production build
+        run: |
+          npx serve dist -l 4173 > /tmp/leftover-serve.log 2>&1 &
+          echo $! > /tmp/leftover-serve.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/leftover-serve.log
+          exit 1
+      - name: Run exact-commit browser QA
+        env:
+          QA_BASE_URL: http://127.0.0.1:4173
+        run: |
+          set -o pipefail
+          node tests/browser-qa.cjs 2>&1 | tee browser-qa.log
+      - name: Upload browser QA diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-qa-log
+          path: browser-qa.log
+          if-no-files-found: ignore
