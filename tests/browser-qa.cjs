@@ -1,7 +1,7 @@
-// Production browser QA: rerun after mobile layout fixes.
+// Browser QA for the exact built commit. Override QA_BASE_URL for production smoke checks.
 const { chromium } = require('playwright');
 const assert = require('assert');
-const base='https://www.buildwithleftovers.com';
+const base=process.env.QA_BASE_URL||'https://www.buildwithleftovers.com';
 const materialPages=['tile','flooring','plywood','lumber','wallpaper','decking','trim'];
 let passed=0;
 (async()=>{
@@ -11,6 +11,7 @@ let passed=0;
  page.on('pageerror',e=>errors.push(String(e)));
  page.on('console',m=>{if(m.type()==='error' && !m.text().includes('adsbygoogle')) errors.push(m.text());});
  for(const slug of materialPages){
+   console.log(`QA ${slug}: opening`);
    const r=await page.goto(`${base}/${slug}`,{waitUntil:'domcontentloaded',timeout:30000});
    assert(r && r.ok(),`${slug} failed HTTP`);
    await page.waitForSelector('#run',{timeout:10000});
@@ -32,6 +33,7 @@ let passed=0;
    assert(!(await page.locator('#printPlan').isDisabled()),`${slug} print disabled after calculation`);
 
    if(slug==='lumber'){
+     console.log('QA lumber: Workshop Mode');
      const workshop=page.locator('#workshopMode');
      assert(await workshop.count(),'Workshop Mode button missing');
      assert(!(await workshop.isDisabled()),'Workshop Mode disabled after valid lumber calculation');
@@ -41,8 +43,7 @@ let passed=0;
      let guard=0;
      while(guard++<200){
        const next=page.locator('#workshopNext');
-       const hidden=await next.isHidden();
-       if(hidden)break;
+       if(await next.isHidden())break;
        const text=(await next.textContent()).trim();
        await next.click();
        await page.waitForTimeout(10);
