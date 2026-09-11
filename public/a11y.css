@@ -14,8 +14,9 @@
 html body .difference-grid article p{color:#505d57!important}
 html body .difference-grid article:first-child p{color:#e6e4dc!important}
 html body .idea-grid a span,html body .related-grid a span,html body .related a span{color:#405b51!important}
-html body .finder-shell .finder-form label small,html body .finder-form label small{color:#505d57!important}
+html body .finder-shell .finder-form label small,html body .finder-form label small{color:#505d57!important;opacity:1!important}
 html body #dimensionNote,html body p#dimensionNote,html body .finder-field-note,html body .finder-shell small{color:#505d57!important}
+html body #dimensionNote,html body .finder-field-note{opacity:1!important}
 
 /* Minimum practical control sizing on touch screens. */
 select{min-height:36px;padding:8px 30px 8px 10px}
