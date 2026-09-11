@@ -47,10 +47,15 @@ jobs:
         if: success()
         run: |
           set -o pipefail
-          npx lighthouse http://127.0.0.1:4173/ --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-home.json
+          # The homepage is the only page that has shown meaningful synthetic
+          # runner variance. Run it three times and evaluate the median so one
+          # noisy VM cannot fail the build while preserving the 600 ms TBT gate.
+          npx lighthouse http://127.0.0.1:4173/ --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-home-1.json
+          npx lighthouse http://127.0.0.1:4173/ --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-home-2.json
+          npx lighthouse http://127.0.0.1:4173/ --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-home-3.json
           npx lighthouse http://127.0.0.1:4173/tile --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-tile.json
           npx lighthouse http://127.0.0.1:4173/what-can-i-make --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-finder.json
-          node tests/performance-qa.cjs lh-home.json lh-tile.json lh-finder.json 2>&1 | tee lighthouse-summary.log
+          node tests/performance-qa.cjs lh-home-1.json lh-home-2.json lh-home-3.json lh-tile.json lh-finder.json 2>&1 | tee lighthouse-summary.log
       - name: Upload QA diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -59,7 +64,9 @@ jobs:
           path: |
             accessibility-qa.log
             lighthouse-summary.log
-            lh-home.json
+            lh-home-1.json
+            lh-home-2.json
+            lh-home-3.json
             lh-tile.json
             lh-finder.json
           if-no-files-found: ignore
