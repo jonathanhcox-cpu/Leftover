@@ -6,6 +6,7 @@ on:
     paths:
       - 'public/engine.js'
       - 'public/app.js'
+      - 'build.cjs'
       - 'tests/engine-regression.cjs'
       - 'tests/engine-property.cjs'
       - '.github/workflows/calculator-qa.yml'
