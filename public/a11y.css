@@ -9,9 +9,12 @@
 .finder-results strong,.finder-summary strong{color:var(--accessible-accent)!important}
 .difference article:first-child>span{color:#ffd0b3!important}
 
-/* Context-specific contrast: avoid applying muted dark text to dark cards. */
-.related a span{color:#405b51!important}
-.finder-field-note,#dimensionNote,.finder-shell small{color:#505d57!important}
+/* Context-specific contrast: explicit specificity keeps mobile/theme rules from
+   reintroducing low-contrast secondary copy. */
+html body .difference-grid article p{color:#505d57!important}
+html body .related-grid a span,html body .related a span{color:#405b51!important}
+html body .finder-shell .finder-form label small{color:#505d57!important}
+html body #dimensionNote,html body .finder-field-note,html body .finder-shell small{color:#505d57!important}
 
 /* Minimum practical control sizing on touch screens. */
 select{min-height:36px;padding:8px 30px 8px 10px}
