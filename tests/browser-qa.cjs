@@ -33,10 +33,18 @@ let passed=0;
    assert(!(await page.locator('#printPlan').isDisabled()),`${slug} print disabled after calculation`);
 
    if(slug==='lumber'){
-     console.log('QA lumber: Workshop Mode');
+     console.log('QA lumber: Workshop Mode with cut list');
+     // A footage-only lumber result is intentionally a linear estimate. Workshop Mode
+     // becomes actionable only after individual cuts exist, because otherwise there are
+     // no physical cut steps to guide.
+     await page.locator('#addCut').click();
+     await page.locator('#cutRows input[data-key="len"]').first().fill('3');
+     await page.locator('#cutRows input[data-key="qty"]').first().fill('3');
+     await page.locator('#run').click();
+     await page.waitForTimeout(100);
      const workshop=page.locator('#workshopMode');
      assert(await workshop.count(),'Workshop Mode button missing');
-     assert(!(await workshop.isDisabled()),'Workshop Mode disabled after valid lumber calculation');
+     assert(!(await workshop.isDisabled()),'Workshop Mode disabled after valid cut-list calculation');
      await workshop.click();
      await page.waitForSelector('#workshopModal:not([hidden])');
      assert((await page.locator('#workshopTitle').textContent()).includes('Step-by-step build guide'),'Workshop title did not explain mode');
