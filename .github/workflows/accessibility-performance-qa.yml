@@ -40,20 +40,24 @@ jobs:
       - name: Run accessibility QA
         env:
           QA_BASE_URL: http://127.0.0.1:4173
-        run: node tests/accessibility-qa.cjs
+        run: |
+          set -o pipefail
+          node tests/accessibility-qa.cjs 2>&1 | tee accessibility-qa.log
       - name: Run mobile Lighthouse audits
+        if: success()
         run: |
           set -o pipefail
           npx lighthouse http://127.0.0.1:4173/ --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-home.json
           npx lighthouse http://127.0.0.1:4173/tile --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-tile.json
           npx lighthouse http://127.0.0.1:4173/what-can-i-make --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-finder.json
           node tests/performance-qa.cjs lh-home.json lh-tile.json lh-finder.json 2>&1 | tee lighthouse-summary.log
-      - name: Upload Lighthouse diagnostics
+      - name: Upload QA diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: lighthouse-diagnostics
+          name: accessibility-performance-diagnostics
           path: |
+            accessibility-qa.log
             lighthouse-summary.log
             lh-home.json
             lh-tile.json
