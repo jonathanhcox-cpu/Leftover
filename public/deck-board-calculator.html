@@ -4,14 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Deck Spacing Calculator – Decking Board Spacing | Leftover</title>
-  <meta name="description" content="Free deck board spacing calculator. Enter deck size, board width and gap to calculate decking rows, gap count, installed coverage, linear feet and board needs.">
+  <meta name="description" content="Free deck spacing calculator and decking board spacing calculator. Enter deck size, board width and gap to estimate board rows, gaps, linear feet and stock boards.">
   <link rel="canonical" href="https://www.buildwithleftovers.com/deck-board-calculator">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#173f35">
+  <meta property="og:title" content="Deck Spacing Calculator – Decking Board Spacing | Leftover">
+  <meta property="og:description" content="Calculate deck board spacing, board rows, gaps, linear feet and a practical stock-board estimate from your deck dimensions.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.buildwithleftovers.com/deck-board-calculator">
+  <meta property="og:image" content="https://www.buildwithleftovers.com/logo.svg">
+  <meta property="og:image:alt" content="Leftover — Plan Smart. Waste Less.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Deck Spacing Calculator – Decking Board Spacing | Leftover">
+  <meta name="twitter:description" content="Calculate deck board spacing, board rows, gaps, linear feet and a practical stock-board estimate from your deck dimensions.">
+  <meta name="twitter:image" content="https://www.buildwithleftovers.com/logo.svg">
   <link rel="stylesheet" href="/style.css?v=20260912-deck-spacing">
   <style>
     .spacing-wrap{max-width:1180px;margin:0 auto;padding:0 22px 56px}.spacing-tool{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}.spacing-card{background:var(--card,#fff);border:1px solid rgba(23,63,53,.16);border-radius:22px;padding:24px;box-shadow:0 16px 42px rgba(23,63,53,.07)}.spacing-card h2,.spacing-card h3{margin-top:0}.spacing-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.spacing-fields label{display:flex;flex-direction:column;gap:7px;font-weight:700}.spacing-fields label.wide{grid-column:1/-1}.spacing-fields input,.spacing-fields select{width:100%;box-sizing:border-box;padding:12px 13px;border:1px solid rgba(23,63,53,.28);border-radius:12px;background:#fff;color:inherit;font:inherit}.spacing-fields small{font-weight:400;line-height:1.35}.spacing-run{width:100%;margin-top:18px;border:0;border-radius:999px;padding:13px 18px;font:inherit;font-weight:800;cursor:pointer;background:#173f35;color:#fff}.spacing-error{margin:14px 0 0;color:#9b2c2c;font-weight:700}.spacing-results{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.spacing-stat{border:1px solid rgba(23,63,53,.14);border-radius:16px;padding:15px;background:rgba(23,63,53,.035)}.spacing-stat b{display:block;font-size:1.55rem;line-height:1.05;margin-bottom:5px}.spacing-stat span{font-size:.9rem}.spacing-summary{padding:15px 16px;border-radius:14px;background:rgba(23,63,53,.08);line-height:1.55}.spacing-note{font-size:.9rem;line-height:1.55;margin-bottom:0}.spacing-keyword-copy{max-width:900px}.spacing-tool-anchor{scroll-margin-top:24px}@media(max-width:760px){.spacing-tool{grid-template-columns:1fr}.spacing-fields{grid-template-columns:1fr}.spacing-fields label.wide{grid-column:auto}.spacing-results{grid-template-columns:1fr 1fr}}
   </style>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Deck Board Spacing Calculator","url":"https://www.buildwithleftovers.com/deck-board-calculator","applicationCategory":"UtilitiesApplication","isAccessibleForFree":true,"description":"Calculate deck board rows, board gaps, installed coverage, linear feet and a minimum stock-board estimate from deck dimensions, board face width and board spacing."}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Deck Board Spacing Calculator","url":"https://www.buildwithleftovers.com/deck-board-calculator","applicationCategory":"UtilitiesApplication","isAccessibleForFree":true,"description":"Calculate deck board rows, board gaps, installed coverage, linear feet and a stock-board estimate from deck dimensions, board face width and board spacing."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.buildwithleftovers.com/"},{"@type":"ListItem","position":2,"name":"Decking","item":"https://www.buildwithleftovers.com/decking"},{"@type":"ListItem","position":3,"name":"Deck board spacing calculator","item":"https://www.buildwithleftovers.com/deck-board-calculator"}]}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate spacing between deck boards?","acceptedAnswer":{"@type":"Answer","text":"Use the actual board face width plus the intended gap as the repeating width across the deck. The calculator uses that spacing to estimate the number of rows needed."}},{"@type":"Question","name":"Does this deck spacing calculator calculate joist spacing?","acceptedAnswer":{"@type":"Answer","text":"No. This tool calculates the visible gap between decking boards. Joist spacing is structural and should follow the decking manufacturer, framing design and applicable building requirements."}},{"@type":"Question","name":"Does a wider decking board gap change the number of boards?","acceptedAnswer":{"@type":"Answer","text":"Yes. Wider gaps add more open space between rows, which can reduce the number of board rows required across a fixed deck width."}}]}</script>
 </head>
 <body>
@@ -25,7 +36,7 @@
     <div>
       <span class="eyebrow">BOARD GAP / ROW COUNT / LINEAR FEET</span>
       <h1>Deck Board Spacing Calculator</h1>
-      <p>Calculate how board width and the gap between decking boards affect the number of rows across your deck. Get board-row count, gap count, installed coverage, linear feet and a minimum stock-board estimate.</p>
+      <p>Use this decking board spacing calculator to see how board width and the gap between deck boards affect the number of rows across your deck. Get board-row count, gap count, installed coverage, linear feet and a practical stock-board estimate.</p>
       <a class="cta" href="#spacing-calculator">Calculate deck board spacing →</a>
     </div>
   </section>
@@ -74,10 +85,10 @@
           <div class="spacing-stat"><b id="rowCount">26</b><span>board rows</span></div>
           <div class="spacing-stat"><b id="gapCount">25</b><span>gaps between rows</span></div>
           <div class="spacing-stat"><b id="linearFeet">260 ft</b><span>decking linear feet</span></div>
-          <div class="spacing-stat"><b id="stockBoards">24</b><span>minimum boards incl. reserve</span></div>
+          <div class="spacing-stat"><b id="stockBoards">29</b><span>stock boards incl. reserve</span></div>
         </div>
         <p class="spacing-summary" id="spacingSummary">With 5.5-inch boards and a 0.125-inch gap, this layout needs 26 rows across the deck.</p>
-        <p class="spacing-note" id="stockNote">The stock-board number is a minimum based on total linear footage plus the planning reserve. Actual purchase count can be higher when board lengths, butt joints, joist locations, staggering and usable offcuts are considered.</p>
+        <p class="spacing-note" id="stockNote">The stock-board estimate respects full-length runs when the selected stock board is long enough. When stock is shorter than a row, joint layout and usable offcuts can change the physical purchase count.</p>
       </section>
     </div>
   </section>
@@ -134,22 +145,25 @@
     const runFt=direction==='length'?length:width;
     const acrossIn=acrossFt*12;
     const pitch=board+gap;
-    const rows=Math.max(1,Math.ceil((acrossIn+gap)/pitch));
+    const rows=Math.max(1,Math.ceil(((acrossIn+gap)/pitch)-1e-10));
     const gaps=Math.max(0,rows-1);
     const totalGap=gaps*gap;
     const coverage=rows*board+totalGap;
     const overage=Math.max(0,coverage-acrossIn);
     const linear=rows*runFt;
-    const minimumByFootage=Math.ceil(linear/stock);
-    const reserveBoards=Math.ceil(minimumByFootage*(reserve/100));
-    const planned=minimumByFootage+reserveBoards;
+    const footageMinimum=Math.ceil((linear/stock)-1e-10);
+    const fullRunsPerStock=stock>=runFt?Math.max(1,Math.floor((stock/runFt)+1e-10)):0;
+    const fullRunMinimum=fullRunsPerStock?Math.ceil(rows/fullRunsPerStock):0;
+    const minimumStockBoards=Math.max(footageMinimum,fullRunMinimum);
+    const reserveBoards=Math.ceil((minimumStockBoards*(reserve/100))-1e-10);
+    const planned=minimumStockBoards+reserveBoards;
     $('rowCount').textContent=rows.toLocaleString();
     $('gapCount').textContent=gaps.toLocaleString();
     $('linearFeet').textContent=fmt(linear,1)+' ft';
     $('stockBoards').textContent=planned.toLocaleString();
     $('spacingSummary').textContent=`With ${fmt(board,3)}-inch boards and a ${fmt(gap,3)}-inch gap, the ${fmt(acrossFt,2)}-ft dimension across the boards needs ${rows} board rows and ${gaps} gaps. The gaps total ${fmt(totalGap,2)} inches, installed coverage is ${fmt(coverage,2)} inches, and the final row has about ${fmt(overage,2)} inches of coverage beyond the target width before any edge trimming.`;
-    const fullRunNote=stock>=runFt?` A ${fmt(stock,2)}-ft stock board is at least as long as the ${fmt(runFt,2)}-ft board run; cut layout can still affect the final quantity.`:` Your ${fmt(stock,2)}-ft stock length is shorter than the ${fmt(runFt,2)}-ft board run, so butt joints would be required and the final physical board count may exceed this footage-based minimum.`;
-    $('stockNote').textContent=`Minimum by footage: ${minimumByFootage} stock boards, plus ${reserveBoards} for the ${fmt(reserve,1)}% planning reserve = ${planned} total. This is a material estimate, not a structural or cut-layout plan.${fullRunNote} Verify manufacturer spacing, joist support, fasteners, joints and applicable requirements before installation.`;
+    const countMethod=fullRunsPerStock?` The estimate also requires enough stock pieces to supply ${rows} continuous ${fmt(runFt,2)}-ft runs; each ${fmt(stock,2)}-ft stock board can supply up to ${fullRunsPerStock} full run${fullRunsPerStock===1?'':'s'}.`:` Your ${fmt(stock,2)}-ft stock length is shorter than the ${fmt(runFt,2)}-ft board run, so butt joints would be required. In this case the displayed count is a linear-footage minimum and the physical board count can be higher depending on joint placement and usable offcuts.`;
+    $('stockNote').textContent=`Planning minimum: ${minimumStockBoards} stock boards, plus ${reserveBoards} for the ${fmt(reserve,1)}% reserve = ${planned} total.${countMethod} Verify manufacturer spacing, joist support, fasteners, joints and applicable requirements before installation.`;
   }
   $('calculateSpacing').addEventListener('click',calculate);
   $('deckSpacingForm').addEventListener('input',calculate);
