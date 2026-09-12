@@ -6,6 +6,7 @@ on:
     paths:
       - 'public/**'
       - 'build.cjs'
+      - 'postbuild-workshop.cjs'
       - 'tests/accessibility-qa.cjs'
       - 'tests/performance-qa.cjs'
       - '.github/workflows/accessibility-performance-qa.yml'
@@ -27,7 +28,7 @@ jobs:
           npm install playwright@1.55.0 @axe-core/playwright@4.10.2 lighthouse@12.8.2 serve@14.2.4
           npx playwright install --with-deps chromium
       - name: Build exact commit
-        run: node build.cjs
+        run: node build.cjs && node postbuild-workshop.cjs
       - name: Start local production build
         run: |
           npx serve dist -l 4173 > /tmp/leftover-serve.log 2>&1 &
