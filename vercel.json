@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "framework": null,
-  "buildCommand": "node build.cjs && node postbuild-workshop.cjs && node postbuild-workshop-selectall.cjs && node postbuild-traffic.cjs",
+  "buildCommand": "node build.cjs && node postbuild-workshop.cjs && node postbuild-workshop-selectall.cjs && node postbuild-traffic.cjs && node postbuild-traffic-finalize.cjs",
   "outputDirectory": "dist",
   "installCommand": null,
   "redirects": [
