@@ -125,11 +125,15 @@ let passed=0;
    passed++;
  }
 
+ console.log('QA project finder: primary action renders and reveals matches');
  await page.goto(`${base}/what-can-i-make`,{waitUntil:'domcontentloaded'});
- await page.locator('[data-sample="lumber"]').click();
- await page.waitForTimeout(100);
+ await page.locator('#findIdeas').click();
+ await page.waitForFunction(()=>document.querySelectorAll('#ideaResults .idea-match').length>0);
  assert((await page.locator('#ideaResults').textContent()).trim().length>20,'project finder returned no results');
  assert(!(await page.locator('#shareFinder').isDisabled()),'project finder share stayed disabled');
+ await page.waitForTimeout(400);
+ const finderPosition=await page.locator('.finder-results').evaluate(el=>({top:el.getBoundingClientRect().top,height:window.innerHeight}));
+ assert(finderPosition.top<finderPosition.height,'project finder results were not brought into view after the main action');
  passed++;
 
  console.log('QA homepage: Start a project routes through material chooser');
@@ -141,11 +145,13 @@ let passed=0;
  assert((await page.locator('.hero-actions .text-link').getAttribute('href'))==='#materials','hero project entry must target the material chooser');
  assert((await page.locator('.hero-actions .text-link').textContent()).trim()==='Choose a material','hero project entry should clearly describe the next step');
  assert(await page.locator('#materials .material').count()===7,'material chooser should expose all seven material options');
- await page.locator('header a.pill').click();
+ const visibleProjectEntry=page.locator('.hero-actions .text-link');
+ assert(await visibleProjectEntry.isVisible(),'mobile project entry should remain visible');
+ await visibleProjectEntry.click();
  await page.waitForTimeout(50);
- assert((await page.evaluate(()=>location.hash))==='#materials','Start a project should land on #materials even when decking was last used');
+ assert((await page.evaluate(()=>location.hash))==='#materials','project entry should land on #materials even when decking was last used');
  const materialTop=await page.locator('#materials').evaluate(el=>el.getBoundingClientRect().top);
- assert(materialTop<250,'material chooser should be brought into view after Start a project');
+ assert(materialTop<250,'material chooser should be brought into view after choosing a material');
  passed++;
 
  const mobileOverflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
