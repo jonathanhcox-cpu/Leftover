@@ -3,27 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Deck Spacing Calculator – Decking Board Spacing | Leftover</title>
-  <meta name="description" content="Free deck spacing calculator and decking board spacing calculator. Enter deck size, board width and gap to estimate board rows, gaps, linear feet and stock boards.">
+  <title>Deck Spacing Calculator – Find Board Gap & Board Count | Leftover</title>
+  <meta name="description" content="Free deck spacing calculator. Choose decking material and condition to determine a planning gap, then calculate deck board rows, gaps, linear feet and stock boards.">
   <link rel="canonical" href="https://www.buildwithleftovers.com/deck-board-calculator">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="theme-color" content="#173f35">
-  <meta property="og:title" content="Deck Spacing Calculator – Decking Board Spacing | Leftover">
-  <meta property="og:description" content="Calculate deck board spacing, board rows, gaps, linear feet and a practical stock-board estimate from your deck dimensions.">
+  <meta property="og:title" content="Deck Spacing Calculator – Find Board Gap & Board Count | Leftover">
+  <meta property="og:description" content="Choose your decking material to get a side-to-side planning gap, then calculate board rows, linear feet and stock-board needs.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.buildwithleftovers.com/deck-board-calculator">
   <meta property="og:image" content="https://www.buildwithleftovers.com/logo.svg">
   <meta property="og:image:alt" content="Leftover — Plan Smart. Waste Less.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Deck Spacing Calculator – Decking Board Spacing | Leftover">
-  <meta name="twitter:description" content="Calculate deck board spacing, board rows, gaps, linear feet and a practical stock-board estimate from your deck dimensions.">
+  <meta name="twitter:title" content="Deck Spacing Calculator – Find Board Gap & Board Count | Leftover">
+  <meta name="twitter:description" content="Determine a planning gap from your decking material, then calculate rows, gaps, linear feet and stock boards.">
   <meta name="twitter:image" content="https://www.buildwithleftovers.com/logo.svg">
-  <link rel="stylesheet" href="/style.css?v=20260912-deck-spacing">
+  <link rel="stylesheet" href="/style.css?v=20260912-deck-spacing-helper">
   <style>
-    .spacing-wrap{max-width:1180px;margin:0 auto;padding:0 22px 56px}.spacing-tool{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}.spacing-card{background:var(--card,#fff);border:1px solid rgba(23,63,53,.16);border-radius:22px;padding:24px;box-shadow:0 16px 42px rgba(23,63,53,.07)}.spacing-card h2,.spacing-card h3{margin-top:0}.spacing-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.spacing-fields label{display:flex;flex-direction:column;gap:7px;font-weight:700}.spacing-fields label.wide{grid-column:1/-1}.spacing-fields input,.spacing-fields select{width:100%;box-sizing:border-box;padding:12px 13px;border:1px solid rgba(23,63,53,.28);border-radius:12px;background:#fff;color:inherit;font:inherit}.spacing-fields small{font-weight:400;line-height:1.35}.spacing-run{width:100%;margin-top:18px;border:0;border-radius:999px;padding:13px 18px;font:inherit;font-weight:800;cursor:pointer;background:#173f35;color:#fff}.spacing-error{margin:14px 0 0;color:#9b2c2c;font-weight:700}.spacing-results{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.spacing-stat{border:1px solid rgba(23,63,53,.14);border-radius:16px;padding:15px;background:rgba(23,63,53,.035)}.spacing-stat b{display:block;font-size:1.55rem;line-height:1.05;margin-bottom:5px}.spacing-stat span{font-size:.9rem}.spacing-summary{padding:15px 16px;border-radius:14px;background:rgba(23,63,53,.08);line-height:1.55}.spacing-note{font-size:.9rem;line-height:1.55;margin-bottom:0}.spacing-keyword-copy{max-width:900px}.spacing-tool-anchor{scroll-margin-top:24px}@media(max-width:760px){.spacing-tool{grid-template-columns:1fr}.spacing-fields{grid-template-columns:1fr}.spacing-fields label.wide{grid-column:auto}.spacing-results{grid-template-columns:1fr 1fr}}
+    .spacing-wrap{max-width:1180px;margin:0 auto;padding:0 22px 56px}.spacing-tool{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}.spacing-card{background:var(--card,#fff);border:1px solid rgba(23,63,53,.16);border-radius:22px;padding:24px;box-shadow:0 16px 42px rgba(23,63,53,.07)}.spacing-card h2,.spacing-card h3{margin-top:0}.spacing-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.spacing-fields label{display:flex;flex-direction:column;gap:7px;font-weight:700}.spacing-fields label.wide{grid-column:1/-1}.spacing-fields input,.spacing-fields select,.spacing-helper select{width:100%;box-sizing:border-box;padding:12px 13px;border:1px solid rgba(23,63,53,.28);border-radius:12px;background:#fff;color:inherit;font:inherit}.spacing-fields small{font-weight:400;line-height:1.35}.spacing-run{width:100%;margin-top:18px;border:0;border-radius:999px;padding:13px 18px;font:inherit;font-weight:800;cursor:pointer;background:#173f35;color:#fff}.spacing-error{margin:14px 0 0;color:#9b2c2c;font-weight:700}.spacing-results{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.spacing-stat{border:1px solid rgba(23,63,53,.14);border-radius:16px;padding:15px;background:rgba(23,63,53,.035)}.spacing-stat b{display:block;font-size:1.55rem;line-height:1.05;margin-bottom:5px}.spacing-stat span{font-size:.9rem}.spacing-summary{padding:15px 16px;border-radius:14px;background:rgba(23,63,53,.08);line-height:1.55}.spacing-note{font-size:.9rem;line-height:1.55;margin-bottom:0}.spacing-keyword-copy{max-width:900px}.spacing-tool-anchor{scroll-margin-top:24px}.spacing-helper{margin:0 0 22px;padding:18px;border:1px solid rgba(23,63,53,.2);border-radius:17px;background:rgba(23,63,53,.045)}.spacing-helper h3{margin:0 0 8px}.spacing-helper>p{margin:0 0 14px;line-height:1.5}.spacing-helper label{display:flex;flex-direction:column;gap:7px;font-weight:800}.spacing-recommendation{display:grid;grid-template-columns:minmax(140px,.65fr) minmax(0,1.35fr);gap:14px;margin-top:14px;align-items:stretch}.spacing-recommendation>div{padding:15px;border-radius:14px;background:#fff;border:1px solid rgba(23,63,53,.14)}.spacing-recommendation strong{display:block;font-size:1.45rem;line-height:1.1;margin-bottom:5px}.spacing-recommendation span{font-size:.85rem;font-weight:800}.spacing-recommendation p{margin:0;line-height:1.5}.spacing-source{margin-top:12px!important;font-size:.86rem}.spacing-source a{font-weight:700}.manual-warning{color:#8a4b08;font-weight:700}.step-label{display:block;margin:0 0 12px;font-size:.82rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}@media(max-width:760px){.spacing-tool{grid-template-columns:1fr}.spacing-fields{grid-template-columns:1fr}.spacing-fields label.wide{grid-column:auto}.spacing-results{grid-template-columns:1fr 1fr}.spacing-recommendation{grid-template-columns:1fr}}
   </style>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Deck Board Spacing Calculator","url":"https://www.buildwithleftovers.com/deck-board-calculator","applicationCategory":"UtilitiesApplication","isAccessibleForFree":true,"description":"Calculate deck board rows, board gaps, installed coverage, linear feet and a stock-board estimate from deck dimensions, board face width and board spacing."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.buildwithleftovers.com/"},{"@type":"ListItem","position":2,"name":"Decking","item":"https://www.buildwithleftovers.com/decking"},{"@type":"ListItem","position":3,"name":"Deck board spacing calculator","item":"https://www.buildwithleftovers.com/deck-board-calculator"}]}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate spacing between deck boards?","acceptedAnswer":{"@type":"Answer","text":"Use the actual board face width plus the intended gap as the repeating width across the deck. The calculator uses that spacing to estimate the number of rows needed."}},{"@type":"Question","name":"Does this deck spacing calculator calculate joist spacing?","acceptedAnswer":{"@type":"Answer","text":"No. This tool calculates the visible gap between decking boards. Joist spacing is structural and should follow the decking manufacturer, framing design and applicable building requirements."}},{"@type":"Question","name":"Does a wider decking board gap change the number of boards?","acceptedAnswer":{"@type":"Answer","text":"Yes. Wider gaps add more open space between rows, which can reduce the number of board rows required across a fixed deck width."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Deck Board Spacing Calculator","url":"https://www.buildwithleftovers.com/deck-board-calculator","applicationCategory":"UtilitiesApplication","isAccessibleForFree":true,"description":"Choose decking material and condition to determine a side-to-side planning gap, then calculate deck board rows, gaps, installed coverage, linear feet and stock-board needs."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.buildwithleftovers.com/"},{"@type":"ListItem","position":2,"name":"Decking","item":"https://www.buildwithleftovers.com/decking"},{"@type":"ListItem","position":3,"name":"Deck board spacing calculator","item":"https://www.buildwithleftovers.com/deck-board-calculator"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I determine spacing between deck boards?","acceptedAnswer":{"@type":"Answer","text":"Deck board spacing depends on the decking material, moisture condition, product line and fastener system. This calculator can suggest a side-to-side planning gap for common wood, Trex and TimberTech cases, then lets you override that value when the manufacturer requires something different."}},{"@type":"Question","name":"Does this deck spacing calculator calculate joist spacing?","acceptedAnswer":{"@type":"Answer","text":"No. This tool calculates the visible side-to-side gap between decking boards. Joist spacing is structural and should follow the decking manufacturer, framing design and applicable building requirements."}},{"@type":"Question","name":"Does a wider decking board gap change the number of boards?","acceptedAnswer":{"@type":"Answer","text":"Yes. Wider gaps add more open space between rows, which can reduce the number of board rows required across a fixed deck width."}}]}</script>
 </head>
 <body>
 <header>
@@ -34,10 +34,10 @@
   <nav class="guide-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/decking">Decking</a><span>/</span><span>Deck board spacing calculator</span></nav>
   <section class="material-page-hero">
     <div>
-      <span class="eyebrow">BOARD GAP / ROW COUNT / LINEAR FEET</span>
+      <span class="eyebrow">FIND BOARD GAP / ROW COUNT / LINEAR FEET</span>
       <h1>Deck Board Spacing Calculator</h1>
-      <p>Use this decking board spacing calculator to see how board width and the gap between deck boards affect the number of rows across your deck. Get board-row count, gap count, installed coverage, linear feet and a practical stock-board estimate.</p>
-      <a class="cta" href="#spacing-calculator">Calculate deck board spacing →</a>
+      <p>First choose your decking material to determine a side-to-side planning gap. Then see how that spacing affects board rows, installed coverage, linear feet and stock-board needs.</p>
+      <a class="cta" href="#spacing-calculator">Determine my deck spacing →</a>
     </div>
   </section>
 
@@ -45,7 +45,30 @@
     <div class="spacing-tool">
       <form class="spacing-card" id="deckSpacingForm" onsubmit="return false">
         <span class="eyebrow">FREE DECKING BOARD SPACING CALCULATOR</span>
-        <h2 id="spacingTitle">Enter your deck and board measurements</h2>
+        <h2 id="spacingTitle">Determine spacing, then calculate your layout</h2>
+
+        <div class="spacing-helper" aria-labelledby="spacingHelperTitle">
+          <span class="step-label">Step 1 · Determine a planning gap</span>
+          <h3 id="spacingHelperTitle">What decking are you installing?</h3>
+          <p>Choose the closest material or product case. The calculator will fill the side-to-side gap used in the layout math.</p>
+          <label>Decking material / condition
+            <select id="spacingPreset">
+              <option value="wood-dry" selected>Traditional wood — dry / acclimated</option>
+              <option value="wood-wet">Pressure-treated wood — fresh / wet</option>
+              <option value="trex">Trex composite decking</option>
+              <option value="timbertech-composite">TimberTech Composite — CONCEALoc</option>
+              <option value="timbertech-pvc">TimberTech Advanced PVC</option>
+              <option value="manual">Other product / manufacturer-specific spacing</option>
+            </select>
+          </label>
+          <div class="spacing-recommendation" aria-live="polite">
+            <div><strong id="recommendedGap">1/8 in</strong><span id="recommendationLabel">PLANNING GAP APPLIED</span></div>
+            <div><p id="spacingGuidance">For traditional wood that has dried and acclimated, about 1/8 inch is a common side-to-side planning gap. Verify the lumber supplier and local requirements before installation.</p></div>
+          </div>
+          <p class="spacing-source" id="spacingSource">Reference: general wood-deck guidance from <a href="https://www.timbertech.com/ideas/deck-board-spacing/" rel="noopener noreferrer">TimberTech</a>. Product instructions always override this planning value.</p>
+        </div>
+
+        <span class="step-label">Step 2 · Calculate rows and board quantity</span>
         <div class="spacing-fields">
           <label>Deck width
             <span><input id="deckWidth" type="number" min="0.01" step="any" value="12" inputmode="decimal"> ft</span>
@@ -63,8 +86,9 @@
           <label>Board face width
             <span><input id="boardWidth" type="number" min="0.01" step="any" value="5.5" inputmode="decimal"> in</span>
           </label>
-          <label>Gap between boards
+          <label>Gap used in calculation
             <span><input id="boardGap" type="number" min="0" step="any" value="0.125" inputmode="decimal"> in</span>
+            <small>Auto-filled by the spacing helper. Edit it if your exact product instructions require a different side-to-side gap.</small>
           </label>
           <label>Stock board length
             <span><input id="stockLength" type="number" min="0.01" step="any" value="12" inputmode="decimal"> ft</span>
@@ -73,15 +97,16 @@
             <span><input id="reservePct" type="number" min="0" max="100" step="any" value="10" inputmode="decimal"> %</span>
           </label>
         </div>
-        <button class="spacing-run" id="calculateSpacing" type="button">Calculate spacing →</button>
+        <button class="spacing-run" id="calculateSpacing" type="button">Calculate deck layout →</button>
         <p class="spacing-error" id="spacingError" role="alert" hidden></p>
-        <p class="spacing-note">Use the gap required for your specific decking product and conditions. The 1/8-inch value shown is an example input, not a universal installation recommendation.</p>
+        <p class="spacing-note">This helper estimates <strong>side-to-side board spacing</strong>, not joist spacing or end-to-end expansion gaps. Always follow the current installation guide for your exact decking line, fastener system and local requirements.</p>
       </form>
 
       <section class="spacing-card" id="spacingResult" aria-live="polite" aria-labelledby="resultTitle">
-        <span class="eyebrow">SPACING RESULT</span>
+        <span class="eyebrow">SPACING + LAYOUT RESULT</span>
         <h2 id="resultTitle">Your deck layout estimate</h2>
         <div class="spacing-results">
+          <div class="spacing-stat"><b id="activeGap">1/8 in</b><span>side-to-side gap used</span></div>
           <div class="spacing-stat"><b id="rowCount">26</b><span>board rows</span></div>
           <div class="spacing-stat"><b id="gapCount">25</b><span>gaps between rows</span></div>
           <div class="spacing-stat"><b id="linearFeet">260 ft</b><span>decking linear feet</span></div>
@@ -94,10 +119,17 @@
   </section>
 
   <section class="how seo-copy spacing-keyword-copy">
-    <span class="eyebrow">HOW THE SPACING MATH WORKS</span>
-    <h2>Calculate deck board spacing, rows and board count</h2>
-    <p>This deck spacing calculator uses the deck dimension across the boards, the actual board face width and the intended gap between boards. Board width plus gap creates the repeating pitch. The tool then calculates how many rows are needed to cover the deck and how much of the width is made up of open gaps.</p>
-    <p>If you searched for a <strong>decking board spacing calculator</strong> or <strong>decking space calculator</strong>, this is the same board-gap calculation. It does not calculate structural joist spacing.</p>
+    <span class="eyebrow">HOW THE SPACING HELPER WORKS</span>
+    <h2>Determine deck board spacing before calculating board count</h2>
+    <p>Deck board spacing is not one universal number. Traditional wood changes mainly with moisture across its width, while composite and PVC products have product- and fastener-specific gapping requirements. The helper uses common manufacturer guidance for the cases listed above, fills the side-to-side gap, and then uses that value in the row-count calculation.</p>
+    <p>For dry or acclimated traditional wood, the planning value is 1/8 inch. Fresh pressure-treated wood is shown as a tight initial installation because it commonly shrinks as it dries. Trex composite is set to 3/16 inch width-to-width. TimberTech Composite with CONCEALoc is set to 3/16 inch. TimberTech Advanced PVC has a manufacturer range of 1/8 to 1/4 inch depending on the fastening system, so this calculator uses the 1/8-inch minimum only as a planning starting point and tells you to verify the exact system.</p>
+    <p>If your product is not listed, select <strong>Other product / manufacturer-specific spacing</strong> and enter the side-to-side gap from its current installation guide. This calculator intentionally does not guess an unverified product-specific value.</p>
+  </section>
+
+  <section class="seo-path">
+    <span class="eyebrow">SOURCE CHECK</span>
+    <h2>Why the recommended gap changes by decking type</h2>
+    <p><a href="https://www.yellawood.com/resources/building-with-yellawood/building-tips/" rel="noopener noreferrer">YellaWood</a> advises installing wet treated boards tightly because shrinkage occurs as the boards dry. <a href="https://www.trex.com/deck-ideas/how-to-space-deck-boards/" rel="noopener noreferrer">Trex</a> specifies a 3/16-inch width-to-width gap for its composite decking. <a href="https://www.timbertech.com/resources/deck-building/timbertech-pro-edge-decking-with-concealoc/" rel="noopener noreferrer">TimberTech Composite with CONCEALoc</a> uses 3/16 inch, while <a href="https://www.timbertech.com/resources/deck-building/timbertech-advanced-pvc-decking-with-toploc/" rel="noopener noreferrer">TimberTech Advanced PVC</a> calls for 1/8 to 1/4 inch depending on the fastening approach.</p>
   </section>
 
   <section class="seo-path">
@@ -110,9 +142,9 @@
     <span class="eyebrow">COMMON QUESTIONS</span>
     <h2>Deck board spacing calculator FAQ</h2>
     <div class="steps">
-      <div><strong>01</strong><h3>Does board spacing change the board count?</h3><p>Yes. The gap is part of the repeating width across the deck. A different gap can change the number of rows needed.</p></div>
-      <div><strong>02</strong><h3>Is this the same as joist spacing?</h3><p>No. This tool calculates the visible gap between deck-board rows. Joist spacing is structural and depends on the decking system, framing design and applicable requirements.</p></div>
-      <div><strong>03</strong><h3>Why calculate linear feet too?</h3><p>Linear feet converts the row layout into total decking length, which is useful when comparing the project with stock board lengths and leftover material.</p></div>
+      <div><strong>01</strong><h3>Does this calculator determine the gap?</h3><p>Yes. Choose a supported decking material or condition and the helper fills a side-to-side planning gap automatically. You can override it when your exact product guide requires a different value.</p></div>
+      <div><strong>02</strong><h3>Is this the same as joist spacing?</h3><p>No. This tool calculates the visible side-to-side gap between deck-board rows. Joist spacing is structural and depends on the decking system, framing design and applicable requirements.</p></div>
+      <div><strong>03</strong><h3>Why can’t every composite board use one gap?</h3><p>Composite and PVC products can have different requirements by product line and fastener system. The manufacturer’s current installation instructions control the final gap.</p></div>
     </div>
   </section>
 
@@ -132,6 +164,42 @@
   const $=id=>document.getElementById(id);
   const num=id=>Number($(id).value);
   const fmt=(value,digits=2)=>Number(value.toFixed(digits)).toLocaleString(undefined,{maximumFractionDigits:digits});
+  const fractions=value=>{
+    const map=[[0,'0 in'],[0.125,'1/8 in'],[0.1875,'3/16 in'],[0.25,'1/4 in'],[0.375,'3/8 in']];
+    const found=map.find(([n])=>Math.abs(value-n)<1e-7);
+    return found?found[1]:fmt(value,3)+' in';
+  };
+  const spacingPresets={
+    'wood-dry':{gap:0.125,label:'PLANNING GAP APPLIED',guidance:'For traditional wood that has dried and acclimated, about 1/8 inch is a common side-to-side planning gap. Verify the lumber supplier and local requirements before installation.',source:'Reference: general wood-deck guidance from TimberTech. Product instructions always override this planning value.',url:'https://www.timbertech.com/ideas/deck-board-spacing/'},
+    'wood-wet':{gap:0,label:'TIGHT INITIAL INSTALL',guidance:'Fresh or wet pressure-treated boards are commonly installed tight because they shrink as they dry. The final in-service gap develops with drying; verify the lumber supplier before installation.',source:'Reference: YellaWood building guidance says to space wet deck boards tightly because shrinkage is expected as the wood dries.',url:'https://www.yellawood.com/resources/building-with-yellawood/building-tips/'},
+    'trex':{gap:0.1875,label:'WIDTH-TO-WIDTH GAP APPLIED',guidance:'Trex specifies a 3/16-inch width-to-width gap for its composite deck boards in normal installations. Special environments and end gaps can differ.',source:'Reference: Trex deck-board spacing guidance. Check the current Trex installation guide for your product and site conditions.',url:'https://www.trex.com/deck-ideas/how-to-space-deck-boards/'},
+    'timbertech-composite':{gap:0.1875,label:'CONCEALOC GAP APPLIED',guidance:'TimberTech Composite installed with CONCEALoc uses 3/16-inch spacing between boards. Other TimberTech fastening systems can use a different allowed gap.',source:'Reference: TimberTech Composite with CONCEALoc installation guidance.',url:'https://www.timbertech.com/resources/deck-building/timbertech-pro-edge-decking-with-concealoc/'},
+    'timbertech-pvc':{gap:0.125,label:'MINIMUM PLANNING GAP APPLIED',guidance:'TimberTech Advanced PVC calls for 1/8 to 1/4 inch side-to-side spacing depending on the fastening system. The calculator applies the 1/8-inch minimum as a planning value only; confirm the exact fastener requirement before installation.',source:'Reference: TimberTech Advanced PVC installation guidance. The exact fastener system determines the final spacing within the allowed range.',url:'https://www.timbertech.com/resources/deck-building/timbertech-advanced-pvc-decking-with-toploc/'},
+    'manual':{gap:null,label:'MANUFACTURER GAP REQUIRED',guidance:'This product is not mapped to an automatic spacing value. Keep or enter the side-to-side gap required by the current installation guide for your exact decking and fastener system.',source:'No automatic recommendation is applied for an unlisted product.',url:''}
+  };
+  function applySpacingPreset(){
+    const preset=spacingPresets[$('spacingPreset').value];
+    $('recommendationLabel').textContent=preset.label;
+    $('spacingGuidance').textContent=preset.guidance;
+    $('spacingSource').textContent='';
+    if(preset.url){
+      $('spacingSource').append('Reference: ');
+      const a=document.createElement('a');
+      a.href=preset.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='manufacturer / material guidance';
+      $('spacingSource').append(a,'. Product instructions always override this planning value.');
+    }else{
+      $('spacingSource').textContent=preset.source;
+    }
+    if(preset.gap===null){
+      $('recommendedGap').textContent='Enter product gap';
+      $('spacingGuidance').classList.add('manual-warning');
+    }else{
+      $('spacingGuidance').classList.remove('manual-warning');
+      $('recommendedGap').textContent=fractions(preset.gap)+' ('+fmt(preset.gap*25.4,1)+' mm)';
+      $('boardGap').value=String(preset.gap);
+    }
+    calculate();
+  }
   function calculate(){
     const width=num('deckWidth'),length=num('deckLength'),board=num('boardWidth'),gap=num('boardGap'),stock=num('stockLength'),reserve=num('reservePct'),direction=$('boardDirection').value;
     const error=$('spacingError');
@@ -157,18 +225,20 @@
     const minimumStockBoards=Math.max(footageMinimum,fullRunMinimum);
     const reserveBoards=Math.ceil((minimumStockBoards*(reserve/100))-1e-10);
     const planned=minimumStockBoards+reserveBoards;
+    $('activeGap').textContent=fractions(gap);
     $('rowCount').textContent=rows.toLocaleString();
     $('gapCount').textContent=gaps.toLocaleString();
     $('linearFeet').textContent=fmt(linear,1)+' ft';
     $('stockBoards').textContent=planned.toLocaleString();
-    $('spacingSummary').textContent=`With ${fmt(board,3)}-inch boards and a ${fmt(gap,3)}-inch gap, the ${fmt(acrossFt,2)}-ft dimension across the boards needs ${rows} board rows and ${gaps} gaps. The gaps total ${fmt(totalGap,2)} inches, installed coverage is ${fmt(coverage,2)} inches, and the final row has about ${fmt(overage,2)} inches of coverage beyond the target width before any edge trimming.`;
+    $('spacingSummary').textContent=`Using a ${fmt(gap,3)}-inch side-to-side gap with ${fmt(board,3)}-inch boards, the ${fmt(acrossFt,2)}-ft dimension across the boards needs ${rows} board rows and ${gaps} gaps. The gaps total ${fmt(totalGap,2)} inches, installed coverage is ${fmt(coverage,2)} inches, and the final row has about ${fmt(overage,2)} inches of coverage beyond the target width before any edge trimming.`;
     const countMethod=fullRunsPerStock?` The estimate also requires enough stock pieces to supply ${rows} continuous ${fmt(runFt,2)}-ft runs; each ${fmt(stock,2)}-ft stock board can supply up to ${fullRunsPerStock} full run${fullRunsPerStock===1?'':'s'}.`:` Your ${fmt(stock,2)}-ft stock length is shorter than the ${fmt(runFt,2)}-ft board run, so butt joints would be required. In this case the displayed count is a linear-footage minimum and the physical board count can be higher depending on joint placement and usable offcuts.`;
     $('stockNote').textContent=`Planning minimum: ${minimumStockBoards} stock boards, plus ${reserveBoards} for the ${fmt(reserve,1)}% reserve = ${planned} total.${countMethod} Verify manufacturer spacing, joist support, fasteners, joints and applicable requirements before installation.`;
   }
+  $('spacingPreset').addEventListener('change',applySpacingPreset);
   $('calculateSpacing').addEventListener('click',calculate);
-  $('deckSpacingForm').addEventListener('input',calculate);
-  $('deckSpacingForm').addEventListener('change',calculate);
-  calculate();
+  $('deckSpacingForm').addEventListener('input',event=>{if(event.target.id!=='spacingPreset')calculate();});
+  $('deckSpacingForm').addEventListener('change',event=>{if(event.target.id!=='spacingPreset')calculate();});
+  applySpacingPreset();
 })();
 </script>
 </body>
