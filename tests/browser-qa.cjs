@@ -67,23 +67,50 @@ let passed=0;
    passed++;
  }
 
- console.log('QA deck-board-calculator: spacing math, SEO metadata, mobile layout');
+ console.log('QA deck-board-calculator: spacing helper, math, SEO metadata, mobile layout');
  {
    const r=await page.goto(`${base}/deck-board-calculator`,{waitUntil:'domcontentloaded',timeout:30000});
    assert(r && r.ok(),'deck-board-calculator failed HTTP');
    await page.waitForSelector('#deckSpacingForm',{timeout:10000});
    assert((await page.title()).includes('Deck Spacing Calculator'),'deck spacing title missing primary query');
    const description=await page.locator('meta[name="description"]').getAttribute('content');
-   assert(description && description.toLowerCase().includes('decking board spacing calculator'),'deck spacing meta description missing GSC query language');
+   assert(description && description.toLowerCase().includes('determine a planning gap'),'deck spacing meta description should explain gap determination');
    assert((await page.locator('link[rel="canonical"]').getAttribute('href'))==='https://www.buildwithleftovers.com/deck-board-calculator','deck spacing canonical mismatch');
    const diag=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth}));
    assert(diag.overflow<3,`deck-board-calculator horizontal overflow ${diag.overflow}px`);
 
+   assert((await page.locator('#spacingPreset').inputValue())==='wood-dry','spacing helper should default to dry/acclimated wood');
+   assert((await page.locator('#recommendedGap').textContent()).includes('1/8 in'),'dry wood recommendation should show 1/8 inch');
+   assert((await page.locator('#boardGap').inputValue())==='0.125','dry wood helper should apply 0.125-inch gap');
+   assert((await page.locator('#activeGap').textContent()).trim()==='1/8 in','result should show active 1/8-inch gap');
    assert((await page.locator('#rowCount').textContent()).trim()==='26','default deck spacing row count should be 26');
    assert((await page.locator('#gapCount').textContent()).trim()==='25','default deck spacing gap count should be 25');
    assert((await page.locator('#linearFeet').textContent()).trim()==='260 ft','default deck spacing linear feet should be 260 ft');
    assert((await page.locator('#stockBoards').textContent()).trim()==='29','12-ft stock must preserve 26 continuous 10-ft rows plus reserve');
 
+   await page.locator('#spacingPreset').selectOption('wood-wet');
+   await page.waitForTimeout(50);
+   assert((await page.locator('#boardGap').inputValue())==='0','wet pressure-treated helper should apply tight initial spacing');
+   assert((await page.locator('#activeGap').textContent()).trim()==='0 in','result should show zero initial gap for wet wood preset');
+   assert((await page.locator('#rowCount').textContent()).trim()==='27','tight wet-wood spacing should update row count');
+
+   await page.locator('#spacingPreset').selectOption('trex');
+   await page.waitForTimeout(50);
+   assert((await page.locator('#boardGap').inputValue())==='0.1875','Trex helper should apply 3/16-inch width-to-width gap');
+   assert((await page.locator('#recommendedGap').textContent()).includes('3/16 in'),'Trex helper should display 3/16 inch');
+
+   await page.locator('#spacingPreset').selectOption('timbertech-pvc');
+   await page.waitForTimeout(50);
+   assert((await page.locator('#recommendedGap').textContent()).includes('1/8 in'),'TimberTech PVC helper should display 1/8-inch minimum planning gap');
+   assert((await page.locator('#spacingGuidance').textContent()).includes('1/8 to 1/4 inch'),'TimberTech PVC guidance should expose manufacturer range');
+
+   await page.locator('#spacingPreset').selectOption('manual');
+   await page.locator('#boardGap').fill('0.25');
+   await page.waitForTimeout(50);
+   assert((await page.locator('#recommendedGap').textContent()).includes('Enter product gap'),'manual product helper should not invent a recommendation');
+   assert((await page.locator('#activeGap').textContent()).trim()==='1/4 in','manual 1/4-inch gap should feed layout result');
+
+   await page.locator('#spacingPreset').selectOption('wood-dry');
    await page.locator('#stockLength').fill('20');
    await page.locator('#reservePct').fill('0');
    await page.waitForTimeout(50);
@@ -118,6 +145,6 @@ let passed=0;
  }
  passed++;
  assert(errors.length===0,'browser console/page errors: '+errors.join(' | '));
- console.log(`Browser QA passed: ${passed} scenario groups, ${materialPages.length} reuse calculators, deck spacing regression checks, Workshop Mode completion, project finder, mobile overflow, and internal links.`);
+ console.log(`Browser QA passed: ${passed} scenario groups, ${materialPages.length} reuse calculators, deck spacing helper + regression checks, Workshop Mode completion, project finder, mobile overflow, and internal links.`);
  await browser.close();
 })().catch(e=>{console.error(e.stack||e);process.exit(1);});
