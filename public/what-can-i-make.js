@@ -2,9 +2,18 @@
 'use strict';
 
 const E=window.LeftoverEngine;
-if(!E)return;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
+if(!E){
+  const showEngineError=()=>{
+    const title=$('resultTitle'),summary=$('ideaSummary'),button=$('findIdeas');
+    if(title)title.textContent='Project finder could not start.';
+    if(summary)summary.innerHTML='<span class="finder-warning">Please refresh the page and try again. The calculation engine did not load.</span>';
+    if(button)button.disabled=true;
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',showEngineError,{once:true});else showEngineError();
+  return;
+}
 const CONFIG={
   tile:{name:'Tile',mode:'area',unit:'tile',plural:'tiles',defaults:[18,12,12]},
   flooring:{name:'Flooring',mode:'area',unit:'plank',plural:'planks',defaults:[10,7.5,48]},
@@ -121,7 +130,7 @@ function calcURL(v){
 function applyURL(v){
   const u=new URL(location.href);
   u.searchParams.set('material',v.m);u.searchParams.set('qty',v.qty);u.searchParams.set('w',v.w);u.searchParams.set('h',v.h);
-  history.replaceState(null,'',u.pathname+u.search);
+  try{history.replaceState(null,'',u.pathname+u.search);}catch{}
 }
 function render(){
   let v;
@@ -147,6 +156,27 @@ function render(){
   }).join('');
   $('shareFinder').disabled=false;
   applyURL(v);
+}
+function revealResults(){
+  const panel=document.querySelector('.finder-results');
+  if(!panel)return;
+  const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  panel.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
+}
+function runAndReveal(){
+  const button=$('findIdeas');
+  if(button){button.disabled=true;button.setAttribute('aria-busy','true');button.textContent='Finding project matches…';}
+  requestAnimationFrame(()=>{
+    try{render();}
+    catch(e){
+      $('resultTitle').textContent='Project finder hit an unexpected error.';
+      $('ideaSummary').innerHTML='<span class="finder-warning">'+esc(e&&e.message?e.message:'Please refresh and try again.')+'</span>';
+      $('ideaResults').innerHTML='';$('shareFinder').disabled=true;
+    }finally{
+      if(button){button.disabled=false;button.removeAttribute('aria-busy');button.textContent='Find DIY projects for this material →';}
+      revealResults();
+    }
+  });
 }
 function setDefaults(m){
   const d=CONFIG[m].defaults;
@@ -176,9 +206,9 @@ function loadQuery(){
 }
 
 $('ideaMaterial').addEventListener('change',e=>{setDefaults(e.target.value);render();});
-$('findIdeas').addEventListener('click',render);
+$('findIdeas').addEventListener('click',runAndReveal);
 $('shareFinder').addEventListener('click',share);
-document.querySelectorAll('[data-sample]').forEach(b=>b.addEventListener('click',()=>{$('ideaMaterial').value=b.dataset.sample;setDefaults(b.dataset.sample);render();}));
-['ideaQty','ideaWidth','ideaLength'].forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter')render();}));
+document.querySelectorAll('[data-sample]').forEach(b=>b.addEventListener('click',()=>{$('ideaMaterial').value=b.dataset.sample;setDefaults(b.dataset.sample);runAndReveal();}));
+['ideaQty','ideaWidth','ideaLength'].forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();runAndReveal();}}));
 loadQuery();
 })();
