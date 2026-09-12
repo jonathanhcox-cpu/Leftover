@@ -34,13 +34,30 @@
   margin-bottom: 12px;
 }
 
+#result > .status.yes ~ #purchasePlan .eyebrow,
+#result > .status.yes ~ #purchasePlan h4,
+#result > .status.yes ~ #purchasePlan #priceAnswer b {
+  font-size: 0;
+}
+
+#result > .status.yes ~ #purchasePlan .eyebrow::after {
+  content: "PURCHASE CHECK";
+  font-size: 11px;
+  letter-spacing: .18em;
+  font-weight: 850;
+}
+
+#result > .status.yes ~ #purchasePlan h4::after {
+  content: "You already have enough material.";
+  display: block;
+  font: 500 24px/1.08 Georgia, serif;
+  color: #173f35;
+  margin-top: 6px;
+}
+
 #result > .status.yes ~ #purchasePlan #priceAnswer {
   margin-top: 0;
   padding: 18px 20px;
-}
-
-#result > .status.yes ~ #purchasePlan #priceAnswer b {
-  font-size: 0;
 }
 
 #result > .status.yes ~ #purchasePlan #priceAnswer b::after {
