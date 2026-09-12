@@ -34,9 +34,6 @@ let passed=0;
 
    if(slug==='lumber'){
      console.log('QA lumber: Workshop Mode with cut list');
-     // A footage-only lumber result is intentionally a linear estimate. Workshop Mode
-     // becomes actionable only after individual cuts exist, because otherwise there are
-     // no physical cut steps to guide.
      await page.locator('#addCut').click();
      await page.locator('#cutRows input[data-key="len"]').first().fill('3');
      await page.locator('#cutRows input[data-key="qty"]').first().fill('3');
@@ -134,7 +131,23 @@ let passed=0;
  assert((await page.locator('#ideaResults').textContent()).trim().length>20,'project finder returned no results');
  assert(!(await page.locator('#shareFinder').isDisabled()),'project finder share stayed disabled');
  passed++;
+
+ console.log('QA homepage: Start a project routes through material chooser');
  await page.goto(base,{waitUntil:'domcontentloaded'});
+ await page.evaluate(()=>localStorage.setItem('leftover-plan-v2',JSON.stringify({current:'decking',drafts:{}})));
+ await page.reload({waitUntil:'domcontentloaded'});
+ await page.waitForSelector('#materials');
+ assert((await page.locator('header a.pill').getAttribute('href'))==='#materials','header Start a project must target the material chooser');
+ assert((await page.locator('.hero-actions .text-link').getAttribute('href'))==='#materials','hero project entry must target the material chooser');
+ assert((await page.locator('.hero-actions .text-link').textContent()).trim()==='Choose a material','hero project entry should clearly describe the next step');
+ assert(await page.locator('#materials .material').count()===7,'material chooser should expose all seven material options');
+ await page.locator('header a.pill').click();
+ await page.waitForTimeout(50);
+ assert((await page.evaluate(()=>location.hash))==='#materials','Start a project should land on #materials even when decking was last used');
+ const materialTop=await page.locator('#materials').evaluate(el=>el.getBoundingClientRect().top);
+ assert(materialTop<250,'material chooser should be brought into view after Start a project');
+ passed++;
+
  const mobileOverflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
  assert(mobileOverflow<3,`homepage horizontal overflow ${mobileOverflow}px`);
  const links=await page.locator('a[href^="/"]').evaluateAll(as=>[...new Set(as.map(a=>a.getAttribute('href')).filter(h=>h&&!h.startsWith('/#')&&!h.includes('#')))]);
@@ -145,6 +158,6 @@ let passed=0;
  }
  passed++;
  assert(errors.length===0,'browser console/page errors: '+errors.join(' | '));
- console.log(`Browser QA passed: ${passed} scenario groups, ${materialPages.length} reuse calculators, deck spacing helper + regression checks, Workshop Mode completion, project finder, mobile overflow, and internal links.`);
+ console.log(`Browser QA passed: ${passed} scenario groups, ${materialPages.length} reuse calculators, deck spacing helper + regression checks, project-entry material chooser flow, Workshop Mode completion, project finder, mobile overflow, and internal links.`);
  await browser.close();
 })().catch(e=>{console.error(e.stack||e);process.exit(1);});
