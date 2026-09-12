@@ -1,7 +1,16 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "framework": null,
-  "buildCommand": "node build.cjs && node postbuild-workshop.cjs && node postbuild-workshop-selectall.cjs",
+  "buildCommand": "node build.cjs && node postbuild-workshop.cjs && node postbuild-workshop-selectall.cjs && node postbuild-traffic.cjs",
   "outputDirectory": "dist",
-  "installCommand": null
+  "installCommand": null,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{"type": "host", "value": "buildwithleftovers.com"}],
+      "destination": "https://www.buildwithleftovers.com/:path*",
+      "permanent": true
+    }
+  ]
 }
