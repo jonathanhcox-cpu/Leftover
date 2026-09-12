@@ -66,6 +66,41 @@ let passed=0;
    }
    passed++;
  }
+
+ console.log('QA deck-board-calculator: spacing math, SEO metadata, mobile layout');
+ {
+   const r=await page.goto(`${base}/deck-board-calculator`,{waitUntil:'domcontentloaded',timeout:30000});
+   assert(r && r.ok(),'deck-board-calculator failed HTTP');
+   await page.waitForSelector('#deckSpacingForm',{timeout:10000});
+   assert((await page.title()).includes('Deck Spacing Calculator'),'deck spacing title missing primary query');
+   const description=await page.locator('meta[name="description"]').getAttribute('content');
+   assert(description && description.toLowerCase().includes('decking board spacing calculator'),'deck spacing meta description missing GSC query language');
+   assert((await page.locator('link[rel="canonical"]').getAttribute('href'))==='https://www.buildwithleftovers.com/deck-board-calculator','deck spacing canonical mismatch');
+   const diag=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth}));
+   assert(diag.overflow<3,`deck-board-calculator horizontal overflow ${diag.overflow}px`);
+
+   assert((await page.locator('#rowCount').textContent()).trim()==='26','default deck spacing row count should be 26');
+   assert((await page.locator('#gapCount').textContent()).trim()==='25','default deck spacing gap count should be 25');
+   assert((await page.locator('#linearFeet').textContent()).trim()==='260 ft','default deck spacing linear feet should be 260 ft');
+   assert((await page.locator('#stockBoards').textContent()).trim()==='29','12-ft stock must preserve 26 continuous 10-ft rows plus reserve');
+
+   await page.locator('#stockLength').fill('20');
+   await page.locator('#reservePct').fill('0');
+   await page.waitForTimeout(50);
+   assert((await page.locator('#stockBoards').textContent()).trim()==='13','20-ft stock should supply two 10-ft runs per board');
+
+   await page.locator('#stockLength').fill('8');
+   await page.waitForTimeout(50);
+   assert((await page.locator('#stockBoards').textContent()).trim()==='33','8-ft stock should report the 260/8 linear-footage minimum');
+   assert((await page.locator('#stockNote').textContent()).includes('linear-footage minimum'),'short-stock caveat missing');
+
+   await page.locator('#deckWidth').fill(String(11.125/12));
+   await page.locator('#stockLength').fill('12');
+   await page.waitForTimeout(50);
+   assert((await page.locator('#rowCount').textContent()).trim()==='2','exact two-row coverage boundary should not round up to three rows');
+   passed++;
+ }
+
  await page.goto(`${base}/what-can-i-make`,{waitUntil:'domcontentloaded'});
  await page.locator('[data-sample="lumber"]').click();
  await page.waitForTimeout(100);
@@ -83,6 +118,6 @@ let passed=0;
  }
  passed++;
  assert(errors.length===0,'browser console/page errors: '+errors.join(' | '));
- console.log(`Browser QA passed: ${passed} scenario groups, ${materialPages.length} calculators, Workshop Mode completion, project finder, mobile overflow, and internal links.`);
+ console.log(`Browser QA passed: ${passed} scenario groups, ${materialPages.length} reuse calculators, deck spacing regression checks, Workshop Mode completion, project finder, mobile overflow, and internal links.`);
  await browser.close();
 })().catch(e=>{console.error(e.stack||e);process.exit(1);});
