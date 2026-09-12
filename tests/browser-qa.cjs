@@ -154,10 +154,11 @@ let passed=0;
  const visibleProjectEntry=page.locator('.hero-actions .text-link');
  assert(await visibleProjectEntry.isVisible(),'mobile project entry should remain visible');
  await visibleProjectEntry.click();
- await page.waitForTimeout(50);
- assert((await page.evaluate(()=>location.hash))==='#materials','project entry should land on #materials even when decking was last used');
- const materialTop=await page.locator('#materials').evaluate(el=>el.getBoundingClientRect().top);
- assert(materialTop<250,'material chooser should be brought into view after choosing a material');
+ await page.waitForFunction(()=>location.hash==='#materials');
+ await page.waitForFunction(()=>{
+   const el=document.querySelector('#materials');
+   return el && el.getBoundingClientRect().top<250;
+ },null,{timeout:2500});
  passed++;
 
  const mobileOverflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
