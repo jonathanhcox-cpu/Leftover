@@ -9,6 +9,7 @@ on:
       - 'postbuild-workshop.cjs'
       - 'postbuild-workshop-selectall.cjs'
       - 'postbuild-traffic.cjs'
+      - 'postbuild-traffic-finalize.cjs'
       - 'tests/browser-qa.cjs'
       - '.github/workflows/browser-qa.yml'
   workflow_dispatch:
@@ -29,7 +30,7 @@ jobs:
           npm install playwright@1.55.0 serve@14.2.4
           npx playwright install --with-deps chromium
       - name: Build exact commit
-        run: node build.cjs && node postbuild-workshop.cjs && node postbuild-workshop-selectall.cjs && node postbuild-traffic.cjs
+        run: node build.cjs && node postbuild-workshop.cjs && node postbuild-workshop-selectall.cjs && node postbuild-traffic.cjs && node postbuild-traffic-finalize.cjs
       - name: Start local production build
         run: |
           npx serve dist -l 4173 > /tmp/leftover-serve.log 2>&1 &
