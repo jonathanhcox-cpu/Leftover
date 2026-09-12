@@ -149,3 +149,9 @@
   .seo-path-links a{min-height:88px}
   .guide-breadcrumb{padding:0 18px}
 }
+
+/* Keep contextual planning links distinguishable from surrounding prose. */
+#guide-directory > p a, .cluster-bridge p a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
