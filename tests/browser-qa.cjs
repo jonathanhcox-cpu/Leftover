@@ -33,7 +33,7 @@ let passed=0;
    assert(!(await page.locator('#printPlan').isDisabled()),`${slug} print disabled after calculation`);
 
    if(slug==='lumber'){
-     console.log('QA lumber: Workshop Mode with cut list');
+     console.log('QA lumber: checklist-first Workshop Mode with optional guided view');
      await page.locator('#addCut').click();
      await page.locator('#cutRows input[data-key="len"]').first().fill('3');
      await page.locator('#cutRows input[data-key="qty"]').first().fill('3');
@@ -44,18 +44,24 @@ let passed=0;
      assert(!(await workshop.isDisabled()),'Workshop Mode disabled after valid cut-list calculation');
      await workshop.click();
      await page.waitForSelector('#workshopModal:not([hidden])');
-     assert((await page.locator('#workshopTitle').textContent()).includes('Step-by-step build guide'),'Workshop title did not explain mode');
-     let guard=0;
-     while(guard++<200){
-       const next=page.locator('#workshopNext');
-       if(await next.isHidden())break;
-       const text=(await next.textContent()).trim();
-       await next.click();
-       await page.waitForTimeout(10);
-       if(text==='Finish build guide')break;
-     }
-     const complete=(await page.locator('#workshopStep').textContent()).trim();
-     assert(complete.includes('BUILD GUIDE COMPLETE'),'Workshop Mode did not reach completion state');
+     assert((await page.locator('#workshopTitle').textContent()).includes('Workshop checklist'),'Workshop Mode should default to checklist view');
+     assert(await page.locator('#workshopChecklist').isVisible(),'Workshop checklist should be visible by default');
+     assert(await page.locator('#workshopNext').count()===0,'Legacy Next button should not exist in default Workshop Mode');
+     const stepChecks=page.locator('[data-workshop-step]');
+     const stepCount=await stepChecks.count();
+     assert(stepCount>0,'Workshop checklist should contain calculated steps');
+     assert((await page.locator('#workshopProgressText').textContent()).trim()===`0 of ${stepCount} complete`,'Workshop progress should start at zero');
+
+     await page.locator('#workshopGuidedToggle').click();
+     assert(await page.locator('#workshopGuided').isVisible(),'Guided mode should be available as an optional view');
+     assert((await page.locator('#workshopGuidedStep').textContent()).includes(`1 of ${stepCount}`),'Guided mode should start at the first step');
+     await page.locator('#workshopGuidedToggle').click();
+     assert(await page.locator('#workshopChecklist').isVisible(),'Checklist view should be restorable from guided mode');
+
+     for(let i=0;i<stepCount;i++) await stepChecks.nth(i).check();
+     assert((await page.locator('#workshopProgressText').textContent()).trim()===`${stepCount} of ${stepCount} complete`,'Workshop progress did not update after checking all steps');
+     const complete=(await page.locator('#workshopComplete').textContent()).trim();
+     assert(complete.includes('BUILD GUIDE COMPLETE'),'Workshop Mode did not reach checklist completion state');
      assert(complete.includes('planned step'),'Workshop completion omitted step summary');
      assert(await page.locator('#workshopPrint').isVisible(),'Workshop completion missing print action');
      assert(await page.locator('#workshopAnother').isVisible(),'Workshop completion missing plan-another-project action');
@@ -164,6 +170,6 @@ let passed=0;
  }
  passed++;
  assert(errors.length===0,'browser console/page errors: '+errors.join(' | '));
- console.log(`Browser QA passed: ${passed} scenario groups, ${materialPages.length} reuse calculators, deck spacing helper + regression checks, project-entry material chooser flow, Workshop Mode completion, project finder, mobile overflow, and internal links.`);
+ console.log(`Browser QA passed: ${passed} scenario groups, ${materialPages.length} reuse calculators, deck spacing helper + regression checks, project-entry material chooser flow, checklist-first Workshop Mode, project finder, mobile overflow, and internal links.`);
  await browser.close();
 })().catch(e=>{console.error(e.stack||e);process.exit(1);});
