@@ -18,6 +18,15 @@ html body .finder-shell .finder-form label small,html body .finder-form label sm
 html body #dimensionNote,html body p#dimensionNote,html body .finder-field-note,html body .finder-shell small{color:#505d57!important}
 html body #dimensionNote,html body .finder-field-note{opacity:1!important}
 
+/* Keep project-finder sample shortcuts consistent with the selected material.
+   A tile sample should never appear while Lumber is selected (or vice versa). */
+.finder-sample-row{display:none!important}
+.finder-sample-row [data-sample]{display:none!important}
+.finder-form:has(#ideaMaterial option[value="lumber"]:checked) .finder-sample-row,
+.finder-form:has(#ideaMaterial option[value="tile"]:checked) .finder-sample-row{display:flex!important}
+.finder-form:has(#ideaMaterial option[value="lumber"]:checked) .finder-sample-row [data-sample="lumber"],
+.finder-form:has(#ideaMaterial option[value="tile"]:checked) .finder-sample-row [data-sample="tile"]{display:inline-flex!important}
+
 /* Minimum practical control sizing on touch screens. */
 select{min-height:36px;padding:8px 30px 8px 10px}
 button{min-height:32px}
