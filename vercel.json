@@ -1,7 +1,7 @@
 {
   "cleanUrls": true,
   "framework": null,
-  "buildCommand": "node build.cjs",
+  "buildCommand": "node build.cjs && node postbuild-workshop.cjs",
   "outputDirectory": "dist",
   "installCommand": null
 }
